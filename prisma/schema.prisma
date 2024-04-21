@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  REGULAR
+  ADMIN
+}
+
+enum PaymentMethod {
+  TON
+}
+
+enum PaymentRequestStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
+
+enum SaleStatus {
+  ON_SALE
+  PAUSED
+  CANCELLED
+  SOLD_OUT
+}
+
+enum SubscriptionStatus {
+  APPROVED
+  PENDING
+  REJECTED
+}
+
+model User {
+  telegramId               String  @id
+  referrerId               String?
+  referralRewardLevelRates Float[] @default([0.08, 0.04, 0.02])
+
+  subscription Subscription?
+
+  purchases        Purchase[]
+  rewardsEarned    Reward[]   @relation("user")
+  rewardsGenerated Reward[]   @relation("referee")
+
+  referees User[] @relation("referrer")
+  paymentRequests PaymentRequest[]
+
+  username String?
+  password String?
+
+  role UserRole @default(REGULAR)
+
+  referrer User? @relation("referrer", fields: [referrerId], references: [telegramId])
+}
+
+model Subscription {
+  telegramId String @id
+
+  telegramUsername    String?
+  dateOfBirth         DateTime?
+  emailAddress        String?
+  indicative          String?
+  phoneNumber         String?
+  cityOfResidency     String?
+  homeAddress         String?
+  personalInterests   String?
+  artisticInterests   String?
+  investmentInterests String?
+  occupation          String?
+  position            String?
+  industry            String?
+  joiningReasons      String?
+  discoveryMethod     String?
+  expectations        String?
+  contribution        String?
+  engagement          String?
+
+  user   User?              @relation(fields: [telegramId], references: [telegramId])
+  status SubscriptionStatus @default(PENDING)
+}
+
+model PaymentRequest {
+  telegramId String
+  saleName String
+  seqNo Int
+
+  code String @unique
+
+  status PaymentRequestStatus @default(PENDING)
+
+  amount Int
+  price Float
+
+  destination String
+
+  user User @relation(fields: [telegramId], references: [telegramId], onDelete: Cascade)
+  sale Sale @relation(fields: [saleName], references: [name], onDelete: Cascade)
+
+  method PaymentMethod
+
+  createdAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  expireAt  DateTime
+
+  @@id(name: "id", fields: [telegramId, saleName, seqNo])
+}
+
+model Sale {
+  name   String     @id
+  status SaleStatus
+
+  phases                 Int
+  tokensPerPhase         Int[]
+  initialPrice           Decimal  @db.Money
+  priceIncrement         Decimal[] @db.Money
+  start                  DateTime? @default(now())
+  end                    DateTime?
+  pausedTime             Int @default(0)
+
+  purchases Purchase[]
+  rewards   Reward[]
+  paymentRequests PaymentRequest[]
+
+  pendingOrderAmount Int @default(0)
+  totalSold    Int @default(0)
+  totalRewards Int @default(0)
+
+  createdAt DateTime @default(now())
+  pausedAt DateTime?
+}
+
+model Purchase {
+  telegramId String
+  saleName   String
+
+  user User @relation(fields: [telegramId], references: [telegramId], onDelete: Cascade)
+
+  sale Sale @relation(fields: [saleName], references: [name], onDelete: Cascade)
+
+  amount Int
+
+  createdAt DateTime @default(now())
+
+  @@id(name: "id", fields: [telegramId, saleName])
+}
+
+model Reward {
+  telegramId String
+  saleName   String
+  refereeId  String
+
+  user    User @relation("user", fields: [telegramId], references: [telegramId], onDelete: Cascade)
+  referee User @relation("referee", fields: [refereeId], references: [telegramId])
+
+  sale Sale @relation(fields: [saleName], references: [name], onDelete: Cascade)
+
+  amount Int
+
+  createdAt DateTime @default(now())
+
+  @@id(name: "id", fields: [telegramId, saleName, refereeId, createdAt])
+}
