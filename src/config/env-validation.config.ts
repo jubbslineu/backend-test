@@ -1,4 +1,4 @@
-import { str, num } from 'envalid';
+import { str, num, email, url } from 'envalid';
 import appConfig from './app.config';
 import { Environments } from '@/enums/environment.enum';
 
@@ -18,6 +18,22 @@ const envValidationConfig = {
   PAYMENT_REQUEST_EXPIRE_IN: num({ default: appConfig.paymentRequestExpirein }),
   TON_PAYMENT_DESTINATION_ADDRESS: str(),
   GECKO_API_KEY: str(),
+  CHANGELLY_FIAT_BASE_URL: str({ default: appConfig.changellyFiatBaseUrl }),
+  CHANGELLY_CRYPTO_BASE_URL: str({
+    default: appConfig.changellyCryptoBaseUrl,
+  }),
+  CHANGELLY_FIAT_API_KEY: str(),
+  CHANGELLY_FIAT_PRIV_KEY: str(),
+  CHANGELLY_FIAT_CALLBACK_PUB_KEY: str(),
+  CHANGELLY_CRYPTO_PRIV_KEY: str(),
+  CHANGELLY_CRYPTO_PUB_KEY: str(),
+  CHANGELLY_CRYPTO_CALLBACK_PUB_KEY: str(),
+  DEFAULT_CUSTOMER_EMAIL: email(),
+  CHANGELLY_FEES_PAYER: str({ choices: ['MERCHANT', 'CUSTOMER'] }),
+  CHANGELLY_PAYMENT_RECEIVER: str(),
+  CHANGELLY_SUCCESS_URL: url(),
+  CHANGELLY_FAIL_URL: url(),
+  AXIOS_TIMEOUT: num({ default: appConfig.axiosTimeout }),
 };
 
 export default envValidationConfig;

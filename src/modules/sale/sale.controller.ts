@@ -6,6 +6,14 @@ import { type CustomResponse } from '@/types/common.type';
 import type { RequestWithUser } from '@/types/extended-request.type';
 import Api from '@/lib/api';
 
+interface CreateCryptoPaymentResponse {
+  paymentUrl: string;
+}
+
+interface GenerateTonPaymentCodeResponse {
+  paymentCode: string;
+}
+
 export default class SaleController extends Api {
   private readonly saleService = new SaleService();
 
@@ -17,6 +25,22 @@ export default class SaleController extends Api {
     try {
       const sale = await this.saleService.startNew(req.body, true);
       this.send(res, sale, HttpStatusCode.Created, 'Sale started');
+    } catch (e) {
+      next(e);
+    }
+  };
+
+  public purchaseWithCrypto = async (
+    req: RequestWithUser,
+    res: CustomResponse<CreateCryptoPaymentResponse>,
+    next: NextFunction
+  ) => {
+    try {
+      const paymentUrl = await this.saleService.createCryptoPayment(
+        req.user,
+        req.body
+      );
+      this.send(res, { paymentUrl }, HttpStatusCode.Created, 'Order created');
     } catch (e) {
       next(e);
     }
@@ -50,7 +74,7 @@ export default class SaleController extends Api {
 
   public generateTonPaymentCode = async (
     req: RequestWithUser,
-    res: CustomResponse<Sale>,
+    res: CustomResponse<GenerateTonPaymentCodeResponse>,
     next: NextFunction
   ) => {
     try {
@@ -61,7 +85,7 @@ export default class SaleController extends Api {
 
       this.send(
         res,
-        { code: paymentCode },
+        { paymentCode },
         HttpStatusCode.Accepted,
         'Please proceed with the payment'
       );

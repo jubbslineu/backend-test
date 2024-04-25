@@ -9,12 +9,17 @@ import {
 } from '@/lib/errors';
 import { geckoClient } from '@/lib/gecko-client';
 import prisma, {
+  Decimal,
   PaymentMethod,
   PaymentRequestStatus,
   SaleStatus,
-  type Decimal,
   type User,
 } from '@/lib/prisma';
+import {
+  ChangellyClient,
+  ApiOptions,
+  CryptoEndpoints,
+} from '@/lib/changelly-client';
 
 interface PhaseStats {
   phase: number;
@@ -32,6 +37,7 @@ interface Sale {
   start: Date | null;
   end: Date | null;
   pausedTime: number;
+  pendingOrderAmount: number;
   totalSold: number;
   totalRewards: number;
   createdAt: Date;
@@ -62,13 +68,17 @@ interface SaleInitParams {
   priceIncrementPerPhase: number;
 }
 
-interface PaymentRequestPayload {
+interface PaymentRequestBody {
   amount: number;
 }
 
 type SaleParam = string | Sale;
 
 export default class SaleService {
+  private readonly _cryptoPaymentClient = new ChangellyClient(
+    ApiOptions.CRYPTO
+  );
+
   public async startNew(
     init: SaleInitParams,
     returnExtended: boolean = false
@@ -103,6 +113,71 @@ export default class SaleService {
       : this.convertToSaleResponse(newSale);
   }
 
+  public async createCryptoPayment(user: User, body: any): Promise<string> {
+    // get active sale
+    const activeSale = await this.currentActiveSale();
+
+    // get user SeqNo
+    const seqNo = await this.getNextAvailableSeqNo(
+      activeSale.name,
+      user.telegramId
+    );
+
+    // create payment code
+    const paymentCode = this._createPaymentCode(
+      user.telegramId,
+      activeSale.name,
+      seqNo
+    );
+
+    // get total price
+    const totalPrice = this.calculateTotalPrice(body.amount, activeSale);
+
+    const expireDate = new Date(
+      this._cryptoPaymentClient.getExpirationTimestampSeconds() * 1000
+    );
+
+    // create payment order
+    try {
+      const response = await this._cryptoPaymentClient.fetch(
+        CryptoEndpoints.CreatePayment,
+        {
+          customer_id: user.telegramId,
+          customer_email: body.userEmail ?? environment.defaultCustomerEmail,
+          order_id: paymentCode,
+          nominal_currency: 'USDT',
+          nominal_amount: totalPrice.toFixed(2),
+          fees_payer: environment.changellyFeesPayer,
+          pending_deadline_at: expireDate,
+          success_redirect_url: environment.changellySuccessUrl,
+          failure_redirect_url: environment.changellyFailUrl,
+        }
+      );
+
+      // create payment request
+      /* const newRequest = */ await this.createNewPaymentRequest(
+        activeSale,
+        user.telegramId,
+        body.paymentMethod.currency,
+        seqNo,
+        body.amount,
+        environment.changellyPaymentReceiver,
+        {
+          paymentCode,
+          totalPrice: totalPrice.toNumber(),
+          expireAt: expireDate,
+        }
+      );
+
+      return response.data.payment_url;
+    } catch (e) {
+      throw new HttpInternalServerError(
+        'Failed creating crypto payment order',
+        [e.message, ...e.errors]
+      );
+    }
+  }
+
   public async getActiveSale(extended: boolean = false): Promise<SaleExtended> {
     const activeSale = await this.currentActiveSale();
 
@@ -115,11 +190,11 @@ export default class SaleService {
 
   public async generateTonPaymentCode(
     user: User,
-    payload: PaymentRequestPayload
+    body: PaymentRequestBody
   ): Promise<string> {
     const activeSale = await this.currentActiveSale();
 
-    await this.cancelAllExpiredRequests(activeSale.name);
+    await this.cancelAllExpiredRequests(activeSale.name, PaymentMethod.TON);
 
     const activeRequest = await prisma.paymentRequest.findFirst({
       where: {
@@ -138,8 +213,13 @@ export default class SaleService {
     const newRequest = await this.createNewPaymentRequest(
       activeSale,
       user.telegramId,
+      PaymentMethod.TON,
       await this.getNextAvailableSeqNo(activeSale.name, user.telegramId),
-      payload.amount
+      body.amount,
+      environment.tonPaymentDestinationAddress,
+      {
+        convertTo: 'TON',
+      }
     );
 
     return newRequest.code;
@@ -237,7 +317,7 @@ export default class SaleService {
       sale = await this.getSalebyName(sale);
     }
 
-    return this.calculateSalePrice(sale).toFixed(2);
+    return this.calculateTokenPrice(sale).toFixed(2);
   }
 
   public getCurrentPhaseStats(sale: Sale): PhaseStats {
@@ -251,7 +331,7 @@ export default class SaleService {
 
           if (
             phaseMinusOne + 1 >= sale.phases ||
-            sale.totalSold <= phaseTokenUpperbound
+            sale.totalSold + sale.pendingOrderAmount <= phaseTokenUpperbound
           ) {
             arr.splice(1);
             currentPhase = phaseMinusOne + 1;
@@ -268,7 +348,7 @@ export default class SaleService {
     };
   }
 
-  private calculateSalePrice(sale: Sale, currentPhase?: number): Decimal {
+  private calculateTokenPrice(sale: Sale, currentPhase?: number): Decimal {
     if (!currentPhase) {
       currentPhase = this.getCurrentPhaseStats(sale).phase;
     }
@@ -280,9 +360,37 @@ export default class SaleService {
     );
   }
 
+  private calculateTotalPrice(amount: number, sale: Sale): Decimal {
+    let { phase: currentPhase, upperLimit } = this.getCurrentPhaseStats(sale);
+    let tokenPrice = this.calculateTokenPrice(sale, currentPhase);
+
+    let totalPrice = new Decimal(0);
+    let tokensFilled = sale.totalSold + sale.pendingOrderAmount;
+    while (tokensFilled + amount > upperLimit) {
+      if (currentPhase >= sale.phases) {
+        throw new HttpBadRequestError('Not enough tokens for sale', [
+          'Cannot calculate total price',
+        ]);
+      }
+      const remainingPhaseAmount = upperLimit - tokensFilled;
+      totalPrice = totalPrice.add(tokenPrice.mul(remainingPhaseAmount));
+      amount -= remainingPhaseAmount;
+      tokensFilled = upperLimit;
+      currentPhase++;
+      upperLimit = upperLimit + sale.tokensPerPhase[currentPhase - 1];
+      tokenPrice = tokenPrice.add(sale.priceIncrement[currentPhase - 2]);
+    }
+
+    totalPrice = totalPrice.add(tokenPrice.mul(amount));
+    tokensFilled += amount;
+
+    return totalPrice;
+  }
+
   private extendSaleProperties(sale: Sale): SaleExtended {
     const phaseStats = this.getCurrentPhaseStats(sale);
     const tokensForSale = sale.tokensPerPhase.reduce((sum, curr) => sum + curr);
+    const tokensFilled = sale.totalSold + sale.pendingOrderAmount;
 
     return {
       ...sale,
@@ -291,10 +399,10 @@ export default class SaleService {
       currentPhase: phaseStats.phase,
       lowerTokenLimit: phaseStats.lowerLimit,
       upperTokenLimit: phaseStats.upperLimit,
-      currentPrice: this.calculateSalePrice(sale, phaseStats.phase).toFixed(2),
+      currentPrice: this.calculateTokenPrice(sale, phaseStats.phase).toFixed(2),
       tokensForSale,
-      remainingTokens: tokensForSale - sale.totalSold,
-      remainingPhaseTokens: phaseStats.upperLimit - sale.totalSold,
+      remainingTokens: tokensForSale - tokensFilled,
+      remainingPhaseTokens: phaseStats.upperLimit - tokensFilled,
     };
   }
 
@@ -355,12 +463,16 @@ export default class SaleService {
     return result;
   }
 
-  private async cancelAllExpiredRequests(saleName: string) {
+  private async cancelAllExpiredRequests(
+    saleName: string,
+    paymentMethod?: PaymentMethod
+  ) {
     const amountToBeReleased = (
       await prisma.paymentRequest.aggregate({
         where: {
           saleName,
           expireAt: { lte: new Date() },
+          method: paymentMethod,
         },
         _sum: {
           amount: true,
@@ -408,35 +520,45 @@ export default class SaleService {
   private async createNewPaymentRequest(
     activeSale: Sale,
     telegramId: string,
+    paymentMethod: PaymentMethod,
     seqNo: number,
-    amount: number
+    amount: number,
+    destination: string,
+    override?: {
+      convertTo?: CryptoCurrency;
+      paymentCode?: string;
+      totalPrice?: number;
+      expireAt?: string | number | Date;
+    }
   ) {
+    // calculate total purchase price
+    const totalPrice =
+      override?.totalPrice ??
+      this.calculateTotalPrice(amount, activeSale).toNumber();
+
+    // create new payment request instance
     const newRequest = await prisma.paymentRequest.create({
       data: {
         telegramId,
         saleName: activeSale.name,
         seqNo,
-        method: PaymentMethod.TON,
+        method: paymentMethod,
         expireAt: new Date(
-          Date.now() + +environment.paymentRequestExpireIn * 1000
+          override?.expireAt ??
+            Date.now() + +environment.paymentRequestExpireIn * 1000
         ),
-        destination: environment.tonPaymentDestinationAddress,
+        destination,
         amount,
-        price: await this.convertCurrency(
-          this.calculateSalePrice(activeSale).toNumber()
-        ),
-        code: createHash('sha256')
-          .update(
-            JSON.stringify({
-              telegramId,
-              saleName: activeSale.name,
-              seqNo,
-            })
-          )
-          .digest('base64'),
+        price: override?.convertTo
+          ? await this.convertCurrency(totalPrice, 'USD', override.convertTo)
+          : totalPrice,
+        code:
+          override?.paymentCode ??
+          this._createPaymentCode(telegramId, activeSale.name, seqNo),
       },
     });
 
+    // update `pedingOrderAmount` for the sale
     await prisma.sale.update({
       where: {
         name: activeSale.name,
@@ -449,5 +571,21 @@ export default class SaleService {
     });
 
     return newRequest;
+  }
+
+  private _createPaymentCode(
+    telegramId: string,
+    saleName: string,
+    seqNo: number
+  ): string {
+    return createHash('sha256')
+      .update(
+        JSON.stringify({
+          telegramId,
+          saleName,
+          seqNo,
+        })
+      )
+      .digest('base64');
   }
 }

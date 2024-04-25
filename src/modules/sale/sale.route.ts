@@ -17,6 +17,12 @@ sale.post(
   controller.startNew
 );
 
+sale.post(
+  '/purchase-with-crypto',
+  verifyRegularUserToken,
+  controller.purchaseWithCrypto
+);
+
 sale.get('/get-current-price', controller.getCurrentSalePrice);
 
 sale.get('/get-active-sale', controller.getActiveSale);

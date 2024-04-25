@@ -3,6 +3,9 @@ import {
   DEFAULT_JWT_EXPIRES_IN,
   DEFAULT_BCRYPT_SALT_ROUNDS,
   PAYMENT_REQUEST_EXPIRE_IN,
+  CHANGELLY_FIAT_BASE_URL,
+  CHANGELLY_CRYPTO_BASE_URL,
+  AXIOS_TIMEOUT,
 } from '@/utils/constants';
 
 interface AppConfig {
@@ -49,6 +52,9 @@ interface AppConfig {
   defaultApiAuthKeys: string;
   defaultBcryptSaltRounds: number;
   paymentRequestExpirein: number;
+  changellyFiatBaseUrl: string;
+  changellyCryptoBaseUrl: string;
+  axiosTimeout: number;
 }
 
 const appConfig: AppConfig = {
@@ -70,6 +76,9 @@ const appConfig: AppConfig = {
   defaultApiAuthKeys: 'api-key,secret-key',
   defaultBcryptSaltRounds: DEFAULT_BCRYPT_SALT_ROUNDS,
   paymentRequestExpirein: PAYMENT_REQUEST_EXPIRE_IN,
+  changellyFiatBaseUrl: CHANGELLY_FIAT_BASE_URL,
+  changellyCryptoBaseUrl: CHANGELLY_CRYPTO_BASE_URL,
+  axiosTimeout: AXIOS_TIMEOUT,
 };
 
 export default appConfig;

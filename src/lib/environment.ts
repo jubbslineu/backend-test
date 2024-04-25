@@ -29,6 +29,20 @@ class Environment implements IEnvironment {
   private _paymentRequestExpireIn: number | string;
   private _tonPaymentDestinationAddress: string;
   private _geckoApiKey: string;
+  private _changellyFiatBaseUrl: string;
+  private _changellyCryptoBaseUrl: string;
+  private _changellyFiatApiKey: string;
+  private _changellyFiatPrivKey: string;
+  private _changellyFiatCallbackPubKey: string;
+  private _changellyCryptoPrivKey: string;
+  private _changellyCryptoPubKey: string;
+  private _changellyCryptoCallbackPubKey: string;
+  private _defaultCustomerEmail: string;
+  private _changellyFeesPayer: string;
+  private _changellyPaymentReceiver: string;
+  private _changellySuccessUrl: string;
+  private _changellyFailUrl: string;
+  private _axiosTimeout: number;
 
   constructor() {
     this.port = +process.env.PORT ?? appConfig.defaultPort;
@@ -123,6 +137,118 @@ class Environment implements IEnvironment {
     this._geckoApiKey = value;
   }
 
+  get changellyFiatPrivKey() {
+    return this._changellyFiatPrivKey;
+  }
+
+  set changellyFiatPrivKey(value) {
+    this._changellyFiatPrivKey = value;
+  }
+
+  get changellyFiatApiKey() {
+    return this._changellyFiatApiKey;
+  }
+
+  set changellyFiatApiKey(value) {
+    this._changellyFiatApiKey = value;
+  }
+
+  get changellyFiatCallbackPubKey() {
+    return this._changellyFiatCallbackPubKey;
+  }
+
+  set changellyFiatCallbackPubKey(value) {
+    this._changellyFiatCallbackPubKey = value;
+  }
+
+  get changellyCryptoPrivKey() {
+    return this._changellyCryptoPrivKey;
+  }
+
+  set changellyCryptoPrivKey(value) {
+    this._changellyCryptoPrivKey = value;
+  }
+
+  get changellyCryptoPubKey() {
+    return this._changellyCryptoPubKey;
+  }
+
+  set changellyCryptoPubKey(value) {
+    this._changellyCryptoPubKey = value;
+  }
+
+  get changellyCryptoCallbackPubKey() {
+    return this._changellyCryptoCallbackPubKey;
+  }
+
+  set changellyCryptoCallbackPubKey(value) {
+    this._changellyCryptoCallbackPubKey = value;
+  }
+
+  get changellyFiatBaseUrl() {
+    return this._changellyFiatBaseUrl;
+  }
+
+  set changellyFiatBaseUrl(value) {
+    this._changellyFiatBaseUrl = value;
+  }
+
+  get changellyCryptoBaseUrl() {
+    return this._changellyCryptoBaseUrl;
+  }
+
+  set changellyCryptoBaseUrl(value) {
+    this._changellyCryptoBaseUrl = value;
+  }
+
+  get defaultCustomerEmail() {
+    return this._defaultCustomerEmail;
+  }
+
+  set defaultCustomerEmail(value) {
+    this._defaultCustomerEmail = value;
+  }
+
+  get changellyFeesPayer() {
+    return this._changellyFeesPayer;
+  }
+
+  set changellyFeesPayer(value) {
+    this._changellyFeesPayer = value;
+  }
+
+  get changellyPaymentReceiver() {
+    return this._changellyPaymentReceiver;
+  }
+
+  set changellyPaymentReceiver(value) {
+    this._changellyPaymentReceiver = value;
+  }
+
+  get changellySuccessUrl() {
+    return this._changellySuccessUrl;
+  }
+
+  set changellySuccessUrl(value) {
+    this._changellySuccessUrl = value;
+  }
+
+  get changellyFailUrl() {
+    return this._changellyFailUrl;
+  }
+
+  set changellyFailUrl(value) {
+    this._changellyFailUrl = value;
+  }
+
+  get axiosTimeout() {
+    return this._axiosTimeout;
+  }
+
+  set axiosTimeout(value) {
+    this._axiosTimeout = value;
+  }
+
   private resolveEnvPath(key: CommonEnvKeys): string {
     // On priority bar, .env.[NODE_ENV] has higher priority than default env file (.env)
     // If both are not resolved, error is thrown.
@@ -147,6 +273,20 @@ class Environment implements IEnvironment {
     this.paymentRequestExpireIn = env.PAYMENT_REQUEST_EXPIRE_IN;
     this.tonPaymentDestinationAddress = env.TON_PAYMENT_DESTINATION_ADDRESS;
     this.geckoApiKey = env.GECKO_API_KEY;
+    this.changellyFiatBaseUrl = env.CHANGELLY_FIAT_BASE_URL;
+    this.changellyCryptoBaseUrl = env.CHANGELLY_CRYPTO_BASE_URL;
+    this.changellyFiatApiKey = env.CHANGELLY_FIAT_API_KEY;
+    this.changellyFiatPrivKey = env.CHANGELLY_FIAT_PRIV_KEY;
+    this.changellyFiatCallbackPubKey = env.CHANGELLY_FIAT_CALLBACK_PUB_KEY;
+    this.changellyCryptoPrivKey = env.CHANGELLY_CRYPTO_PRIV_KEY;
+    this.changellyCryptoPubKey = env.CHANGELLY_CRYPTO_PUB_KEY;
+    this.changellyCryptoCallbackPubKey = env.CHANGELLY_CRYPTO_CALLBACK_PUB_KEY;
+    this.defaultCustomerEmail = env.DEFAULT_CUSTOMER_EMAIL;
+    this.changellyFeesPayer = env.CHANGELLY_FEES_PAYER;
+    this.changellyPaymentReceiver = env.CHANGELLY_PAYMENT_RECEIVER;
+    this.changellySuccessUrl = env.CHANGELLY_SUCCESS_URL;
+    this.changellyFailUrl = env.CHANGELLY_FAIL_URL;
+    this.axiosTimeout = env.AXIOS_TIMEOUT;
   }
 
   public setEnvironment(env = Environments.DEV): void {

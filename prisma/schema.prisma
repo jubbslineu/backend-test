@@ -13,6 +13,8 @@ enum UserRole {
 }
 
 enum PaymentMethod {
+  CHANGELLY_CRYPTO
+  CHANGELLY_FIAT
   TON
 }
 
@@ -20,6 +22,7 @@ enum PaymentRequestStatus {
   PENDING
   PAID
   CANCELLED
+  FAILED
 }
 
 enum SaleStatus {
@@ -146,13 +149,15 @@ model Purchase {
 
   createdAt DateTime @default(now())
 
-  @@id(name: "id", fields: [telegramId, saleName])
+  @@id(name: "id", fields: [telegramId, saleName, createdAt])
 }
 
 model Reward {
   telegramId String
   saleName   String
   refereeId  String
+
+  referralLevel Int
 
   user    User @relation("user", fields: [telegramId], references: [telegramId], onDelete: Cascade)
   referee User @relation("referee", fields: [refereeId], references: [telegramId])
