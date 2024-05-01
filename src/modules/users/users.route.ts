@@ -1,15 +1,23 @@
 import { Router } from 'express';
 import Controller from './users.controller';
-import { CreateUserDto } from '@/dto/user.dto';
+import { AuthenticateDto, RegisterTonAddressDto } from '@/dto/users.dto';
 import RequestValidator from '@/middlewares/request-validator';
+import { verifyRegularUserToken } from '@/middlewares/user-auth';
 
 const users: Router = Router();
 const controller = new Controller();
 
 users.post(
   '/authenticate',
-  RequestValidator.validate(CreateUserDto),
+  RequestValidator.validate(AuthenticateDto),
   controller.authenticate
+);
+
+users.patch(
+  '/register-ton-address',
+  verifyRegularUserToken,
+  RequestValidator.validate(RegisterTonAddressDto),
+  controller.registerTonAddress
 );
 
 export default users;

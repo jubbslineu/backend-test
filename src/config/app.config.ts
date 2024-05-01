@@ -6,6 +6,8 @@ import {
   CHANGELLY_FIAT_BASE_URL,
   CHANGELLY_CRYPTO_BASE_URL,
   AXIOS_TIMEOUT,
+  SIGNATURE_EXPIRES_IN,
+  REGISTER_TON_ADDRESS_PAYLOAD_TEMPLATE,
 } from '@/utils/constants';
 
 interface AppConfig {
@@ -55,6 +57,8 @@ interface AppConfig {
   changellyFiatBaseUrl: string;
   changellyCryptoBaseUrl: string;
   axiosTimeout: number;
+  signatureExpiresIn: number;
+  registerTonAddressPayloadTemplate: string;
 }
 
 const appConfig: AppConfig = {
@@ -79,6 +83,8 @@ const appConfig: AppConfig = {
   changellyFiatBaseUrl: CHANGELLY_FIAT_BASE_URL,
   changellyCryptoBaseUrl: CHANGELLY_CRYPTO_BASE_URL,
   axiosTimeout: AXIOS_TIMEOUT,
+  signatureExpiresIn: SIGNATURE_EXPIRES_IN,
+  registerTonAddressPayloadTemplate: REGISTER_TON_ADDRESS_PAYLOAD_TEMPLATE,
 };
 
 export default appConfig;

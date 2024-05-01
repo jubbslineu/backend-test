@@ -43,6 +43,8 @@ class Environment implements IEnvironment {
   private _changellySuccessUrl: string;
   private _changellyFailUrl: string;
   private _axiosTimeout: number;
+  private _signatureExpiresIn: number | string;
+  private _registerTonAddressPayloadTemplate: string;
 
   constructor() {
     this.port = +process.env.PORT ?? appConfig.defaultPort;
@@ -249,6 +251,22 @@ class Environment implements IEnvironment {
     this._axiosTimeout = value;
   }
 
+  get signatureExpiresIn() {
+    return this._signatureExpiresIn;
+  }
+
+  set signatureExpiresIn(value) {
+    this._signatureExpiresIn = value;
+  }
+
+  get registerTonAddressPayloadTemplate() {
+    return this._registerTonAddressPayloadTemplate;
+  }
+
+  set registerTonAddressPayloadTemplate(value) {
+    this._registerTonAddressPayloadTemplate = value;
+  }
+
   private resolveEnvPath(key: CommonEnvKeys): string {
     // On priority bar, .env.[NODE_ENV] has higher priority than default env file (.env)
     // If both are not resolved, error is thrown.
@@ -287,6 +305,9 @@ class Environment implements IEnvironment {
     this.changellySuccessUrl = env.CHANGELLY_SUCCESS_URL;
     this.changellyFailUrl = env.CHANGELLY_FAIL_URL;
     this.axiosTimeout = env.AXIOS_TIMEOUT;
+    this.signatureExpiresIn = env.SIGNATURE_EXPIRES_IN;
+    this.registerTonAddressPayloadTemplate =
+      env.REGISTER_TON_ADDRESS_PAYLOAD_TEMPLATE;
   }
 
   public setEnvironment(env = Environments.DEV): void {

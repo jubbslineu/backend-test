@@ -36,3 +36,13 @@ export const envFileNotFoundError = (key: CommonEnvKeys): string => {
     \r${divider}
   `;
 };
+
+export const formatTemplate = (
+  template: string,
+  params: Record<string, any>
+): string => {
+  const names = Object.keys(params);
+  const vals = Object.values(params);
+  // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval
+  return new Function(...names, `return \`${template}\`;`)(...vals);
+};

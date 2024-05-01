@@ -13,7 +13,7 @@ import {
 
 @ValidatorConstraint({ name: 'TokensPerPhaseValidator', async: false })
 export class TokensPerPhaseConstraint implements ValidatorConstraintInterface {
-  validate(array: any[], args: ValidationArguments) {
+  validate(array: number[], args: ValidationArguments) {
     return (
       array.every((value) => typeof value === 'number') &&
       array.length === (args.object as any).phases
@@ -21,13 +21,13 @@ export class TokensPerPhaseConstraint implements ValidatorConstraintInterface {
   }
 
   defaultMessage(args: ValidationArguments) {
-    return '($value) must a number array with lenght equal to the number of phases';
+    return `${args.property} must a number array with lenght equal to the number of phases`;
   }
 }
 
 @ValidatorConstraint({ name: 'PriceIncrementValidator', async: false })
 export class PriceIncrementConstraint implements ValidatorConstraintInterface {
-  validate(array: any[], args: ValidationArguments) {
+  validate(array: string[], args: ValidationArguments) {
     return (
       array.every((value) => isDecimal(value)) &&
       array.length === (args.object as any).phases - 1
@@ -35,7 +35,7 @@ export class PriceIncrementConstraint implements ValidatorConstraintInterface {
   }
 
   defaultMessage(args: ValidationArguments) {
-    return '($value) must a number array with lenght equal to the number of phases';
+    return `${args.property} must a number array with lenght equal to the number of phases`;
   }
 }
 

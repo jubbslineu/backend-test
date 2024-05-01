@@ -43,6 +43,10 @@ model User {
   referrerId               String?
   referralRewardLevelRates Float[] @default([0.08, 0.04, 0.02])
 
+  nonce Int @default(0)
+
+  walletAddress        String?
+
   subscription Subscription?
 
   purchases        Purchase[]
@@ -51,6 +55,8 @@ model User {
 
   referees User[] @relation("referrer")
   paymentRequests PaymentRequest[]
+
+  merkleEntries MerkleEntry[]
 
   username String?
   password String?
@@ -113,9 +119,24 @@ model PaymentRequest {
   @@id(name: "id", fields: [telegramId, saleName, seqNo])
 }
 
+model MerkleEntry {
+  telegramId   String
+  saleName     String
+
+  address      String?
+  amount       Int
+
+  user User @relation(fields:[telegramId], references: [telegramId])
+  sale Sale @relation(fields:[saleName], references: [name])
+
+  @@id(name: "id", fields: [telegramId, saleName])
+}
+
 model Sale {
   name   String     @id
   status SaleStatus
+
+  isReceivingAddressEditable      Boolean  @default(false)
 
   phases                 Int
   tokensPerPhase         Int[]
@@ -128,6 +149,8 @@ model Sale {
   purchases Purchase[]
   rewards   Reward[]
   paymentRequests PaymentRequest[]
+
+  merkleEntries  MerkleEntry[]
 
   pendingOrderAmount Int @default(0)
   totalSold    Int @default(0)

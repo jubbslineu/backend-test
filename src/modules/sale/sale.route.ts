@@ -5,7 +5,7 @@ import RequestValidator from '@/middlewares/request-validator';
 import {
   verifyAdminUsertoken,
   verifyRegularUserToken,
-} from '@/middlewares/auth';
+} from '@/middlewares/user-auth';
 
 const sale: Router = Router();
 const controller = new Controller();

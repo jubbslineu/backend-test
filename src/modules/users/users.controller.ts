@@ -3,6 +3,7 @@ import { HttpStatusCode } from 'axios';
 import { type NextFunction, type Request } from 'express';
 import UserService from './users.service';
 import { type CustomResponse } from '@/types/common.type';
+import type { RequestWithUser } from '@/types/extended-request.type';
 import Api from '@/lib/api';
 
 export default class UserController extends Api {
@@ -10,7 +11,7 @@ export default class UserController extends Api {
 
   public authenticate = async (
     req: Request,
-    res: CustomResponse<User>,
+    res: CustomResponse<{ token: string }>,
     next: NextFunction
   ) => {
     try {
@@ -53,8 +54,30 @@ export default class UserController extends Api {
       this.send(
         res,
         { token: userJwt },
-        HttpStatusCode.Created,
+        created ? HttpStatusCode.Created : HttpStatusCode.Found,
         created ? 'User created' : 'User already registered'
+      );
+    } catch (e) {
+      next(e);
+    }
+  };
+
+  public registerTonAddress = async (
+    req: RequestWithUser,
+    res: CustomResponse<User>,
+    next: NextFunction
+  ) => {
+    try {
+      const userTonAddress = this.userService.updateTonAddress(
+        req.user.telegramId,
+        req.body.tonWalletAddress
+      );
+
+      this.send(
+        res,
+        { userTonAddress },
+        HttpStatusCode.Accepted,
+        'User TON wallet address updated'
       );
     } catch (e) {
       next(e);

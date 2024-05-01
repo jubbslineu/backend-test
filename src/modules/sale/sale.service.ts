@@ -1,6 +1,10 @@
 // import LogMessage from '@/decorators/log-message.decorator';
 import { createHash } from 'crypto';
 import { type Coin, type CryptoCurrency, type Currency } from './types';
+import type {
+  SaleResponseObject,
+  SaleExtended,
+} from '@/types/sale-response.type';
 import environment from '@/lib/environment';
 import {
   HttpBadRequestError,
@@ -14,6 +18,7 @@ import prisma, {
   PaymentRequestStatus,
   SaleStatus,
   type User,
+  type Sale,
 } from '@/lib/prisma';
 import {
   ChangellyClient,
@@ -25,39 +30,6 @@ interface PhaseStats {
   phase: number;
   lowerLimit: number;
   upperLimit: number;
-}
-
-interface Sale {
-  name: string;
-  status: SaleStatus;
-  phases: number;
-  tokensPerPhase: number[];
-  initialPrice: Decimal;
-  priceIncrement: Decimal[];
-  start: Date | null;
-  end: Date | null;
-  pausedTime: number;
-  pendingOrderAmount: number;
-  totalSold: number;
-  totalRewards: number;
-  createdAt: Date;
-  pausedAt: Date | null;
-}
-
-interface SaleResponseObject
-  extends Omit<Omit<Sale, 'initialPrice'>, 'priceIncrement'> {
-  initialPrice: string;
-  priceIncrement: string[];
-}
-
-interface SaleExtended extends SaleResponseObject {
-  currentPhase?: number;
-  lowerTokenLimit?: number;
-  upperTokenLimit?: number;
-  currentPrice?: string;
-  tokensForSale?: number;
-  remainingTokens?: number;
-  remainingPhaseTokens?: number;
 }
 
 interface SaleInitParams {
@@ -82,17 +54,13 @@ export default class SaleService {
   public async startNew(
     init: SaleInitParams,
     returnExtended: boolean = false
-  ): Promise<SaleResponseObject> {
-    try {
-      const activeSale = await this.currentActiveSale();
+  ): Promise<SaleExtended> {
+    const activeSale = await this._getActiveSale();
+    if (activeSale) {
       throw new HttpBadRequestError('Sale already ongoing', [
         `Sale with name ${activeSale.name} is active`,
         'Wait for current sale to finish or pause it before proceeding',
       ]);
-    } catch (e) {
-      if (!(e instanceof HttpNotFoundError)) {
-        throw new HttpInternalServerError('Unknown error', e.errors);
-      }
     }
 
     if (await prisma.sale.findUnique({ where: { name: init.name } })) {
@@ -324,22 +292,18 @@ export default class SaleService {
     let currentPhase = 0;
     const upperLimit = sale.tokensPerPhase
       .slice(0)
-      .reduce(
-        (phaseTokenLowerbound, phaseTokenIncrement, phaseMinusOne, arr) => {
-          const phaseTokenUpperbound =
-            phaseTokenLowerbound + phaseTokenIncrement;
-
-          if (
-            phaseMinusOne + 1 >= sale.phases ||
-            sale.totalSold + sale.pendingOrderAmount <= phaseTokenUpperbound
-          ) {
-            arr.splice(1);
-            currentPhase = phaseMinusOne + 1;
-          }
-
-          return phaseTokenUpperbound;
+      .reduce((phaseTokenLowerbound, phaseTokenIncrement, phase, arr) => {
+        const phaseTokenUpperbound = phaseTokenLowerbound + phaseTokenIncrement;
+        if (
+          phase >= sale.phases ||
+          sale.totalSold + sale.pendingOrderAmount <= phaseTokenUpperbound
+        ) {
+          arr.splice(1);
+          currentPhase = phase;
         }
-      );
+
+        return phaseTokenUpperbound;
+      });
 
     return {
       phase: currentPhase,
@@ -355,8 +319,8 @@ export default class SaleService {
 
     return sale.initialPrice.add(
       sale.priceIncrement
-        .splice(0, currentPhase)
-        .reduce((sum, curr) => sum.add(curr))
+        .slice(0, currentPhase - 1)
+        .reduce((sum, curr) => sum.add(curr), new Decimal(0))
     );
   }
 
@@ -415,11 +379,7 @@ export default class SaleService {
   }
 
   private async currentActiveSale(): Promise<Sale> {
-    const activeSale = await prisma.sale.findFirst({
-      where: {
-        status: SaleStatus.ON_SALE,
-      },
-    });
+    const activeSale = await this._getActiveSale();
 
     if (!activeSale) {
       throw new HttpNotFoundError('No active sale', [
@@ -571,6 +531,14 @@ export default class SaleService {
     });
 
     return newRequest;
+  }
+
+  private async _getActiveSale(): Promise<Sale | null> {
+    return await prisma.sale.findFirst({
+      where: {
+        status: SaleStatus.ON_SALE,
+      },
+    });
   }
 
   private _createPaymentCode(

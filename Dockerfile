@@ -6,4 +6,4 @@ ENV POSTGRES_DB=toygers
 
 EXPOSE 5432
 
-ENTRYPOINT bash
+# ENTRYPOINT ["tail", "-f", "/dev/null"]

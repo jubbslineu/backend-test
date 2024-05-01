@@ -1,6 +1,16 @@
-import { str, num, email, url } from 'envalid';
+import { str, num, email, url, makeValidator } from 'envalid';
 import appConfig from './app.config';
 import { Environments } from '@/enums/environment.enum';
+
+const registerTonAddressPayloadRegex =
+  /^.*(?:\$\{address\}.*\$\{nonce\}|\$\{nonce\}.*\$\{address\}).*$/;
+
+const registerTonAddressPayload = makeValidator<string>((input: string) => {
+  if (!registerTonAddressPayloadRegex.exec(input)) {
+    throw new Error('Invalid REGISTER_TON_ADDRESS_PAYLOAD_TEMPLATE env var');
+  }
+  return input;
+});
 
 const envValidationConfig = {
   NODE_ENV: str({
@@ -34,6 +44,10 @@ const envValidationConfig = {
   CHANGELLY_SUCCESS_URL: url(),
   CHANGELLY_FAIL_URL: url(),
   AXIOS_TIMEOUT: num({ default: appConfig.axiosTimeout }),
+  SIGNATURE_EXPIRES_IN: num({ default: appConfig.signatureExpiresIn }),
+  REGISTER_TON_ADDRESS_PAYLOAD_TEMPLATE: registerTonAddressPayload({
+    default: appConfig.registerTonAddressPayloadTemplate,
+  }),
 };
 
 export default envValidationConfig;

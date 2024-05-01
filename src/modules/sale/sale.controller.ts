@@ -1,25 +1,21 @@
 import { type NextFunction, type Request } from 'express';
-import { type Sale } from '@prisma/client';
 import { HttpStatusCode } from 'axios';
 import SaleService from './sale.service';
 import { type CustomResponse } from '@/types/common.type';
 import type { RequestWithUser } from '@/types/extended-request.type';
+import type {
+  CreateCryptoPaymentResponse,
+  GenerateTonPaymentCodeResponse,
+  SaleExtended,
+} from '@/types/sale-response.type';
 import Api from '@/lib/api';
-
-interface CreateCryptoPaymentResponse {
-  paymentUrl: string;
-}
-
-interface GenerateTonPaymentCodeResponse {
-  paymentCode: string;
-}
 
 export default class SaleController extends Api {
   private readonly saleService = new SaleService();
 
   public startNew = async (
     req: Request,
-    res: CustomResponse<Sale>,
+    res: CustomResponse<SaleExtended>,
     next: NextFunction
   ) => {
     try {
@@ -48,7 +44,7 @@ export default class SaleController extends Api {
 
   public getCurrentSalePrice = async (
     _req: Request,
-    res: CustomResponse<Sale>,
+    res: CustomResponse<string>,
     next: NextFunction
   ) => {
     try {
@@ -61,7 +57,7 @@ export default class SaleController extends Api {
 
   public getActiveSale = async (
     _req: Request,
-    res: CustomResponse<Sale>,
+    res: CustomResponse<SaleExtended>,
     next: NextFunction
   ) => {
     try {

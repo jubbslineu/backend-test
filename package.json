@@ -51,6 +51,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@orbs-network/ton-access": "^2.3.3",
     "@prisma/client": "^5.1.1",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.1",
@@ -70,6 +71,10 @@
     "morgan": "^1.10.0",
     "nocache": "^4.0.0",
     "nodemon": "^3.0.1",
+    "reflect-metadata": "^0.2.2",
+    "ton": "^13.9.0",
+    "ton-core": "^0.53.0",
+    "ton-crypto": "^3.2.0",
     "winston": "^3.10.0",
     "zod": "^3.22.4"
   },
