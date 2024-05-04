@@ -1,0 +1,1424 @@
+[test] 05-01-2024 23:05:56 info: Test info log message
+[test] 05-01-2024 23:05:56 error: Test error log message
+[test] 05-01-2024 23:05:64 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:60090',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-01-2024 23:05:98 info: Test info log message
+[test] 05-01-2024 23:05:98 error: Test error log message
+[test] 05-01-2024 23:05:11 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxNTY1MSwiZXhwIjoxNzE0NzAyMDUxfQ.pfKZhns2Vrho1iEcpxOBZbN7c6FezlMWOU-hS6vnVFI"
+}
+[test] 05-01-2024 23:05:12 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxNTY1MSwiZXhwIjoxNzE0NzAyMDUxfQ.pfKZhns2Vrho1iEcpxOBZbN7c6FezlMWOU-hS6vnVFI"
+}
+[test] 05-01-2024 23:05:16 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-02T02:07:31.149Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-02T02:07:31.149Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-01-2024 23:05:17 error: Request Error:
+        
+Error:
+{"name":"PrismaClientKnownRequestError","code":"P2002","clientVersion":"5.13.0","meta":{"modelName":"Sale","target":["name"]}}
+        
+Headers:
+{
+  host: '127.0.0.1:60236',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxNTY1MSwiZXhwIjoxNzE0NzAyMDUxfQ.pfKZhns2Vrho1iEcpxOBZbN7c6FezlMWOU-hS6vnVFI',
+  'content-type': 'application/json',
+  'content-length': '122',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  name: 'test-sale',
+  phases: 3,
+  tokensPerPhase: [ 1000, 1500, 2000 ],
+  initialPrice: '10.00',
+  priceIncrement: [ '10.00', '5.00' ]
+}
+[test] 05-01-2024 23:05:19 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-02T02:07:31.149Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-02T02:07:31.149Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-01-2024 23:05:20 info: "10.00"
+[test] 05-01-2024 23:05:88 error: Request Error:
+        
+Error:
+{"statusCode":404,"rawErrors":["SaleStatus.ON_SALE status not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:60244',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxNTY1MSwiZXhwIjoxNzE0NzAyMDUxfQ.pfKZhns2Vrho1iEcpxOBZbN7c6FezlMWOU-hS6vnVFI',
+  'content-type': 'application/json',
+  'content-length': '31',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ amount: 100, currency: 'USD' }
+[test] 05-01-2024 23:05:100 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:60247',
+  'accept-encoding': 'gzip, deflate',
+  'x-signature': 'Cw0ZCRIcq8XjHkfdrSH2NoltiEa1o+KvwTvgVezVyYgMrN13D3Vii2YGSeIO+1RUz0ezbCX4z9qEkXeJqdVTZlT7TM1Xivsk6G1kNa0bki/xnJ5qOuQzyJ+2RjCmPnkGnVDmx08+vWhDE9mQuu+u+boNKXhZ4SMTvArajdGH908cCRFAORgx9kCPEVgROt0Zva+BESi/OkCkeGPMSIIoSPxW6mOmJ7fz5vavayUBni2KfvtZfn8/JtQ3FsZFoBMHSnc8sfDxqTYMQaNBEvkZ20n5sJG93hrnOB547ZpTXdJzN2wj64s9xPb1jlVTHIYinTwrtqtOwHnvy+a5x7CC/Q==',
+  'content-type': 'application/json',
+  'content-length': '46',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ id: '12345', result: { status: 'COMPLETED' } }
+[test] 05-01-2024 23:05:96 info: Test info log message
+[test] 05-01-2024 23:05:97 error: Test error log message
+[test] 05-01-2024 23:05:42 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxNjg1NiwiZXhwIjoxNzE0NzAzMjU2fQ.2eKj91W553NoSqfZKZObNJpfMzBBf5YYzVxfAemYyzQ"
+}
+[test] 05-01-2024 23:05:42 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxNjg1NiwiZXhwIjoxNzE0NzAzMjU2fQ.2eKj91W553NoSqfZKZObNJpfMzBBf5YYzVxfAemYyzQ"
+}
+[test] 05-01-2024 23:05:43 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["Sale with name test-sale is active","Wait for current sale to finish or pause it before proceeding"]}
+        
+Headers:
+{
+  host: '127.0.0.1:60699',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxNjg1NiwiZXhwIjoxNzE0NzAzMjU2fQ.2eKj91W553NoSqfZKZObNJpfMzBBf5YYzVxfAemYyzQ',
+  'content-type': 'application/json',
+  'content-length': '141',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  name: 'test-sale',
+  phases: 3,
+  tokensPerPhase: [ 1000, 1500, 2000 ],
+  initialPrice: '10.00',
+  priceIncrement: [ '10.00', '5.00' ],
+  status: 'ON_SALE'
+}
+[test] 05-01-2024 23:05:44 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["Sale with name test-sale is active","Wait for current sale to finish or pause it before proceeding"]}
+        
+Headers:
+{
+  host: '127.0.0.1:60701',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxNjg1NiwiZXhwIjoxNzE0NzAzMjU2fQ.2eKj91W553NoSqfZKZObNJpfMzBBf5YYzVxfAemYyzQ',
+  'content-type': 'application/json',
+  'content-length': '141',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  name: 'test-sale',
+  phases: 3,
+  tokensPerPhase: [ 1000, 1500, 2000 ],
+  initialPrice: '10.00',
+  priceIncrement: [ '10.00', '5.00' ],
+  status: 'ON_SALE'
+}
+[test] 05-01-2024 23:05:44 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-02T02:27:36.386Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-02T02:27:36.386Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-01-2024 23:05:45 info: "10.00"
+[test] 05-01-2024 23:05:07 error: Request Error:
+        
+Error:
+{"statusCode":404,"rawErrors":["SaleStatus.ON_SALE status not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:60707',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxNjg1NiwiZXhwIjoxNzE0NzAzMjU2fQ.2eKj91W553NoSqfZKZObNJpfMzBBf5YYzVxfAemYyzQ',
+  'content-type': 'application/json',
+  'content-length': '31',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ amount: 100, currency: 'USD' }
+[test] 05-01-2024 23:05:47 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:60709',
+  'accept-encoding': 'gzip, deflate',
+  'x-signature': 'hMJ2fBFXIopOLHOqBhFKBkIhJ2nFMEw/jScmeMlGsQCzAY7fTeIdHAdCE7sOf26iuz3p+pxy9j/IIsPp9BDvLmajtMl66Zkn2WBg9JODPLW+AorrhRbcCC7wyK+hwYwNAOfjRuSlzvDcIinh5qJ4ar0f9NlS9gClwUCblntZwGVrFQpPDwwi4X2GpzNqO68/4muRJyhhXSSSkhedeXlPOHHOtxUm/c6PpJ76rfDq0/WpRfQa5IOEcG9MIOu/F01KXV/zq6PMsyJdxvVjp0hTUTaSkQf9f6XqSw2yMSHY0wiYwIRDLDt+YQ8NQ1c6N8PojqopDwtelWR5Oj6yol6htg==',
+  'content-type': 'application/json',
+  'content-length': '46',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ id: '12345', result: { status: 'COMPLETED' } }
+[test] 05-01-2024 23:05:58 info: Test info log message
+[test] 05-01-2024 23:05:59 error: Test error log message
+[test] 05-01-2024 23:05:76 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxNzg4NCwiZXhwIjoxNzE0NzA0Mjg0fQ.9HszACFPqEqVoyesIwl8toAkCXPawhe-j6wDitfWRqE"
+}
+[test] 05-01-2024 23:05:76 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxNzg4NCwiZXhwIjoxNzE0NzA0Mjg0fQ.9HszACFPqEqVoyesIwl8toAkCXPawhe-j6wDitfWRqE"
+}
+[test] 05-01-2024 23:05:78 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["Sale with name test-sale already exists"]}
+        
+Headers:
+{
+  host: '127.0.0.1:61081',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxNzg4NCwiZXhwIjoxNzE0NzA0Mjg0fQ.9HszACFPqEqVoyesIwl8toAkCXPawhe-j6wDitfWRqE',
+  'content-type': 'application/json',
+  'content-length': '141',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  name: 'test-sale',
+  phases: 3,
+  tokensPerPhase: [ 1000, 1500, 2000 ],
+  initialPrice: '10.00',
+  priceIncrement: [ '10.00', '5.00' ],
+  status: 'ON_SALE'
+}
+[test] 05-01-2024 23:05:78 error: Request Error:
+        
+Error:
+{"statusCode":404,"rawErrors":["SaleStatus.ON_SALE status not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:61083',
+  'accept-encoding': 'gzip, deflate',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{}
+[test] 05-01-2024 23:05:79 error: Request Error:
+        
+Error:
+{"statusCode":404,"rawErrors":["SaleStatus.ON_SALE status not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:61085',
+  'accept-encoding': 'gzip, deflate',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{}
+[test] 05-01-2024 23:05:90 error: Request Error:
+        
+Error:
+{"statusCode":404,"rawErrors":["SaleStatus.ON_SALE status not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:61087',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxNzg4NCwiZXhwIjoxNzE0NzA0Mjg0fQ.9HszACFPqEqVoyesIwl8toAkCXPawhe-j6wDitfWRqE',
+  'content-type': 'application/json',
+  'content-length': '31',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ amount: 100, currency: 'USD' }
+[test] 05-01-2024 23:05:21 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:61089',
+  'accept-encoding': 'gzip, deflate',
+  'x-signature': 'lAxQ51STkW9eXdAFBBop/yNuSeT01RdpJpIK9GKGj+FCcX48PBViqwN6AJXKIw/kvdnZdQoIqWdTny4CxL/cCIyXrl0lOuh2uZe+jbZSNC8/I4mIvxgQOZUS1OF/yYchPGfW30nctL2SG5ox2CzsS71jJS31h2IZo6dnZb4ssUib+NT4dUXesgN2JqN3eUplT0jNDj0HPy3CcrznJ1HV/VPMlOPjU9byqUqArhseAv5yqZ6Z5gW+u0bTyj5gptKWScO0hbHXV82WB4WMpVRglKkZezRKI8HShs7xz3q4DPHpk0SrFNg9RIQi5tR+dnOd1SMt7cAYRXwSTlG7oxvUgw==',
+  'content-type': 'application/json',
+  'content-length': '46',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ id: '12345', result: { status: 'COMPLETED' } }
+[test] 05-01-2024 23:05:65 info: Test info log message
+[test] 05-01-2024 23:05:66 error: Test error log message
+[test] 05-01-2024 23:05:07 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:61125',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-01-2024 23:05:11 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:61127',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-01-2024 23:05:14 info: Test info log message
+[test] 05-01-2024 23:05:14 error: Test error log message
+[test] 05-01-2024 23:05:29 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxODIzMCwiZXhwIjoxNzE0NzA0NjMwfQ.gGjnrP7-0NfNxBMocnSUiBUg4KuMT__mWvDtiDome6E"
+}
+[test] 05-01-2024 23:05:29 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxODIzMCwiZXhwIjoxNzE0NzA0NjMwfQ.gGjnrP7-0NfNxBMocnSUiBUg4KuMT__mWvDtiDome6E"
+}
+[test] 05-01-2024 23:05:30 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["Sale with name test-sale is active","Wait for current sale to finish or pause it before proceeding"]}
+        
+Headers:
+{
+  host: '127.0.0.1:61247',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxODIzMCwiZXhwIjoxNzE0NzA0NjMwfQ.gGjnrP7-0NfNxBMocnSUiBUg4KuMT__mWvDtiDome6E',
+  'content-type': 'application/json',
+  'content-length': '141',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  name: 'test-sale',
+  phases: 3,
+  tokensPerPhase: [ 1000, 1500, 2000 ],
+  initialPrice: '10.00',
+  priceIncrement: [ '10.00', '5.00' ],
+  status: 'ON_SALE'
+}
+[test] 05-01-2024 23:05:30 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["Sale with name test-sale is active","Wait for current sale to finish or pause it before proceeding"]}
+        
+Headers:
+{
+  host: '127.0.0.1:61249',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxODIzMCwiZXhwIjoxNzE0NzA0NjMwfQ.gGjnrP7-0NfNxBMocnSUiBUg4KuMT__mWvDtiDome6E',
+  'content-type': 'application/json',
+  'content-length': '141',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  name: 'test-sale',
+  phases: 3,
+  tokensPerPhase: [ 1000, 1500, 2000 ],
+  initialPrice: '10.00',
+  priceIncrement: [ '10.00', '5.00' ],
+  status: 'ON_SALE'
+}
+[test] 05-01-2024 23:05:31 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-02T02:50:30.257Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-02T02:50:30.257Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-01-2024 23:05:32 info: "10.00"
+[test] 05-01-2024 23:05:45 error: Request Error:
+        
+Error:
+{"statusCode":404,"rawErrors":["SaleStatus.ON_SALE status not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:61255',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDYxODIzMCwiZXhwIjoxNzE0NzA0NjMwfQ.gGjnrP7-0NfNxBMocnSUiBUg4KuMT__mWvDtiDome6E',
+  'content-type': 'application/json',
+  'content-length': '31',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ amount: 100, currency: 'USD' }
+[test] 05-01-2024 23:05:56 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:61257',
+  'accept-encoding': 'gzip, deflate',
+  'x-signature': 'I+oBgN4Da8d9IS0ssw72RgA1d3sRvw64qyTRgqO3hZD2WwDstRQXo44mXFoKacIkGuf5VjA/GxiCUkLnd++a0KPKbVTkxP4ZTIvYOfJZbJbuhfTe2r/ybJtw52iE/+rFMvAVaSH2IF6sea2zroPS1205uPP3z9MBvEajXxL3TEAE8rSVR231EyS6K9vAIImu3dMWFhchBp15M4uWtkWjji9faYVC1jFf/MeDZCU/ihEg5/16Nfn08avHfo+Gkq9avJ5EmLB3prNtxq8XlflatfFVewvsuM5pNOCzdj2DSRi09PlZnNrHrBWANl76KiH0wdnc1IgEFvucOiorxmNWXA==',
+  'content-type': 'application/json',
+  'content-length': '46',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ id: '12345', result: { status: 'COMPLETED' } }
+[test] 05-02-2024 13:05:70 info: Test info log message
+[test] 05-02-2024 13:05:70 error: Test error log message
+[test] 05-02-2024 13:05:13 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDY2ODQ4MSwiZXhwIjoxNzE0NzU0ODgxfQ.JoKwFM1bHKnfD5bt2nKT5XJN9e9GfN1IeNgkn8HF2co"
+}
+[test] 05-02-2024 13:05:13 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDY2ODQ4MSwiZXhwIjoxNzE0NzU0ODgxfQ.JoKwFM1bHKnfD5bt2nKT5XJN9e9GfN1IeNgkn8HF2co"
+}
+[test] 05-02-2024 13:05:15 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["Sale with name test-sale is active","Wait for current sale to finish or pause it before proceeding"]}
+        
+Headers:
+{
+  host: '127.0.0.1:55633',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDY2ODQ4MSwiZXhwIjoxNzE0NzU0ODgxfQ.JoKwFM1bHKnfD5bt2nKT5XJN9e9GfN1IeNgkn8HF2co',
+  'content-type': 'application/json',
+  'content-length': '141',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  name: 'test-sale',
+  phases: 3,
+  tokensPerPhase: [ 1000, 1500, 2000 ],
+  initialPrice: '10.00',
+  priceIncrement: [ '10.00', '5.00' ],
+  status: 'ON_SALE'
+}
+[test] 05-02-2024 13:05:15 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["Sale with name test-sale is active","Wait for current sale to finish or pause it before proceeding"]}
+        
+Headers:
+{
+  host: '127.0.0.1:55635',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDY2ODQ4MSwiZXhwIjoxNzE0NzU0ODgxfQ.JoKwFM1bHKnfD5bt2nKT5XJN9e9GfN1IeNgkn8HF2co',
+  'content-type': 'application/json',
+  'content-length': '141',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  name: 'test-sale',
+  phases: 3,
+  tokensPerPhase: [ 1000, 1500, 2000 ],
+  initialPrice: '10.00',
+  priceIncrement: [ '10.00', '5.00' ],
+  status: 'ON_SALE'
+}
+[test] 05-02-2024 13:05:17 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-02T16:48:01.105Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-02T16:48:01.105Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-02-2024 13:05:18 error: Request Error:
+        
+Error:
+{"statusCode":404,"rawErrors":["SaleStatus.ON_SALE status not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:55639',
+  'accept-encoding': 'gzip, deflate',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{}
+[test] 05-02-2024 13:05:38 error: Request Error:
+        
+Error:
+{"statusCode":404,"rawErrors":["SaleStatus.ON_SALE status not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:55641',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDY2ODQ4MSwiZXhwIjoxNzE0NzU0ODgxfQ.JoKwFM1bHKnfD5bt2nKT5XJN9e9GfN1IeNgkn8HF2co',
+  'content-type': 'application/json',
+  'content-length': '31',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ amount: 100, currency: 'USD' }
+[test] 05-02-2024 13:05:53 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:55643',
+  'accept-encoding': 'gzip, deflate',
+  'x-signature': 'YaUPGcOlm9D9rZqLuSwjkClKUdkzGYP8kpKuNnYJUABQ3Hvk7tDOIVnbQ3o+f6B2WDaBkuQAf7KpIHAG911V1yvWzy3YAWlQIXmIDLitp78rTk7/Y5D7LKFIimIs5MqhsaYUlTeHoKFFql+QbdFsPL3Hmx10VrWorzLDvB574wxTiHtOYFl+6dAgJnFiJ4oE0AthUA7k1o/6CvNXNflv1VYguo4DXvc1FzZLhiAXeZ7nGv90eq6a2jjwYAnINu9JE3h1uZjefnJsG240PuvyJST34lshzbDVISvxGJ4WpvdnS1TI+s4nd9JeYq8VM90/cNkMAVh9SUsMFvODjKcO4Q==',
+  'content-type': 'application/json',
+  'content-length': '46',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ id: '12345', result: { status: 'COMPLETED' } }
+[test] 05-02-2024 16:05:79 info: Test info log message
+[test] 05-02-2024 16:05:80 error: Test error log message
+[test] 05-02-2024 16:05:12 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:59039',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 16:05:12 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:59041',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 16:05:20 info: Test info log message
+[test] 05-02-2024 16:05:20 error: Test error log message
+[test] 05-02-2024 16:05:26 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:59058',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 16:05:27 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:59060',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 16:05:72 info: Test info log message
+[test] 05-02-2024 16:05:73 error: Test error log message
+[test] 05-02-2024 16:05:69 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:59065',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 16:05:73 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:59068',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 17:05:94 info: Test info log message
+[test] 05-02-2024 17:05:94 error: Test error log message
+[test] 05-02-2024 17:05:01 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:61021',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 17:05:01 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:61023',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 19:05:87 info: Test info log message
+[test] 05-02-2024 19:05:88 error: Test error log message
+[test] 05-02-2024 19:05:25 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDY4Nzk2NywiZXhwIjoxNzE0Nzc0MzY3fQ.yOfHC-IaGHxPE9BBmSTW3-4kfupK8ROD9gIs2QY3pUw"
+}
+[test] 05-02-2024 19:05:28 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-02T22:12:47.278Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-02T22:12:47.278Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-02-2024 19:05:29 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-02T22:12:47.278Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-02T22:12:47.278Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-02-2024 19:05:30 info: "10.00"
+[test] 05-02-2024 19:05:64 info: Test info log message
+[test] 05-02-2024 19:05:65 error: Test error log message
+[test] 05-02-2024 19:05:02 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:64759',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 19:05:28 info: Test info log message
+[test] 05-02-2024 19:05:29 error: Test error log message
+[test] 05-02-2024 19:05:46 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:64774',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 19:05:89 info: Test info log message
+[test] 05-02-2024 19:05:90 error: Test error log message
+[test] 05-02-2024 19:05:01 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:64866',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 19:05:44 info: Test info log message
+[test] 05-02-2024 19:05:45 error: Test error log message
+[test] 05-02-2024 19:05:53 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:64872',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 19:05:54 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:64874',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 19:05:96 info: Test info log message
+[test] 05-02-2024 19:05:97 error: Test error log message
+[test] 05-02-2024 19:05:35 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:65370',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 19:05:41 info: Test info log message
+[test] 05-02-2024 19:05:41 error: Test error log message
+[test] 05-02-2024 19:05:58 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:49537',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 20:05:24 info: Test info log message
+[test] 05-02-2024 20:05:25 error: Test error log message
+[test] 05-02-2024 20:05:39 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:49661',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 20:05:37 info: Test info log message
+[test] 05-02-2024 20:05:38 error: Test error log message
+[test] 05-02-2024 20:05:82 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:49993',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 20:05:03 info: Test info log message
+[test] 05-02-2024 20:05:04 error: Test error log message
+[test] 05-02-2024 20:05:22 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:50173',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-02-2024 20:05:26 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDY5MTk0OSwiZXhwIjoxNzE0Nzc4MzQ5fQ.yz8DnjTxiQivXzCZju9p38qRJArtkOkfcoNIsMpUNq4"
+}
+[test] 05-02-2024 20:05:29 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-02T23:19:09.283Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-02T23:19:09.283Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-02-2024 20:05:42 error: Request Error:
+        
+Error:
+{}
+        
+Headers:
+{
+  host: '127.0.0.1:50179',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDY5MTk0OSwiZXhwIjoxNzE0Nzc4MzQ5fQ.yz8DnjTxiQivXzCZju9p38qRJArtkOkfcoNIsMpUNq4',
+  'content-type': 'application/json',
+  'content-length': '962',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  customer_id: '24fc0740-c6c6-48d8-9735-6b5f42a350d4',
+  customer_email: 'johndoe@example.com',
+  order_id: '34d3149b-8eb0-4898-971a-63464ae73f1e',
+  title: 'DBA',
+  description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit...',
+  success_redirect_url: 'https://example.com/payment/success',
+  failure_redirect_url: 'https://example.com/payment/failure',
+  nominal_currency: 'USDT',
+  nominal_amount: '14.80',
+  fees_payer: 'MERCHANT',
+  payment_data: { sales_manager_id: 221163, customer_phone: '+999999999' },
+  pending_deadline_at: '2023-03-22T15:23:56.876Z',
+  payment_method: { currency: 'USDT', network: 'ETH' },
+  signature: 'VCMV8pvY9JZ8AzETx3mOwD2+3+MswJysDlI2ymo+qeqceNGf/WLwyCfNBkCf/I+WjY9HIun12PG+xwgD87HtBFY881vnbtaqO3Wo3Oh4PShfSLan0cRaZpOMyUpprXb6Ft7N3Lea+kFUTo2gS3K2hENdHzVCCj843otjRIZoAzGIv8tcUQdGol5vr8bEUH/d2MySf1KftFoZQ37SB6RI7dOmw+6hGpjllkbHkO2XIMz/W8owCXDuQmkAlW/xVtO+5gYACG+Wzc7xYwwY7V7z6us0QSPZlnF6oYK1Tlu/1cA7TFTRAGRxDvpH8hOOIh4+PA7iSlaQDba0CD3yKnsnuA=='
+}
+[test] 05-02-2024 20:05:82 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:50181',
+  'accept-encoding': 'gzip, deflate',
+  'x-signature': 'HJxfJbkQ//rL+yzMkqy02e8d1fp28XIm4VhCGdoDe9pDUkHGAotPz0t+n42FJQtxnVf7IyHO0ZonhGLJ0wMB0dCMBWOpiSbYB7eMBPPKdJeJNgbcz+5gwWrGKPsuQTiHYqBJlBTRrlpkoqfG2jN1z/29dYJ3Ym/Fc8wzJW4sZ9K9g4WVm3/08sj3TDKsKknC//jq0WeihGX+exEJEMtld4mtDTRN4Z87jVuAihG2BQ+xGheCv2IulYcb1laG3rW/ImX18GrV1DbYSK0KbUDIJdDHWW4pBwowEO4UlMsX0vQ7zpqQWd1TDQF/Sin/5iNEtbhrhRGBV4YogHJHx02DSg==',
+  'content-type': 'application/json',
+  'content-length': '254',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  payment_id: 'ca2e8aeb-23f5-42d9-a47c-82a2029012ec',
+  order_id: '3afb7e73-2795-4b7d-8c9a-0e169cd920a4',
+  customer_id: '2d21c2b7-2b79-4a42-8133-b94833f4eed0',
+  customer_email: 'johndoe@example.com',
+  state: 'CANCELED',
+  updated_at: '2023-03-22T15:23:56.876Z'
+}

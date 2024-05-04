@@ -37,6 +37,8 @@ class Environment implements IEnvironment {
   private _changellyCryptoPrivKey: string;
   private _changellyCryptoPubKey: string;
   private _changellyCryptoCallbackPubKey: string;
+  private _changellyCryptoPaymentTitle: string;
+  private _changellyCryptoPaymentDescription: string;
   private _defaultCustomerEmail: string;
   private _changellyFeesPayer: string;
   private _changellyPaymentReceiver: string;
@@ -267,6 +269,22 @@ class Environment implements IEnvironment {
     this._registerTonAddressPayloadTemplate = value;
   }
 
+  get changellyCryptoPaymentTitle() {
+    return this._changellyCryptoPaymentTitle;
+  }
+
+  set changellyCryptoPaymentTitle(value) {
+    this._changellyCryptoPaymentTitle = value;
+  }
+
+  get changellyCryptoPaymentDescription() {
+    return this._changellyCryptoPaymentDescription;
+  }
+
+  set changellyCryptoPaymentDescription(value) {
+    this._changellyCryptoPaymentDescription = value;
+  }
+
   private resolveEnvPath(key: CommonEnvKeys): string {
     // On priority bar, .env.[NODE_ENV] has higher priority than default env file (.env)
     // If both are not resolved, error is thrown.
@@ -308,6 +326,9 @@ class Environment implements IEnvironment {
     this.signatureExpiresIn = env.SIGNATURE_EXPIRES_IN;
     this.registerTonAddressPayloadTemplate =
       env.REGISTER_TON_ADDRESS_PAYLOAD_TEMPLATE;
+    this.changellyCryptoPaymentTitle = env.CHANGELLY_CRYPTO_PAYMENT_TITLE;
+    this.changellyCryptoPaymentDescription =
+      env.CHANGELLY_CRYPTO_PAYMENT_DESCRIPTION;
   }
 
   public setEnvironment(env = Environments.DEV): void {

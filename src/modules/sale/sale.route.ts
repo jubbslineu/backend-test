@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import Controller from './sale.controller';
-import { StartNewDto } from '@/dto/sale.dto';
+import { StartNewDto, PurchaseWithCryptoDto } from '@/dto/sale.dto';
 import RequestValidator from '@/middlewares/request-validator';
 import {
   verifyAdminUsertoken,
@@ -20,6 +20,7 @@ sale.post(
 sale.post(
   '/purchase-with-crypto',
   verifyRegularUserToken,
+  RequestValidator.validate(PurchaseWithCryptoDto),
   controller.purchaseWithCrypto
 );
 
@@ -31,6 +32,18 @@ sale.get(
   '/generate-ton-payment-code',
   verifyRegularUserToken,
   controller.generateTonPaymentCode
+);
+
+sale.patch(
+  '/edit-receiving-address/:saleName',
+  verifyRegularUserToken,
+  controller.editReceivingAddress
+);
+
+sale.patch(
+  '/toggle-edit-receiving-address/:saleName',
+  verifyAdminUsertoken,
+  controller.toggleEditReceivingAddress
 );
 
 export default sale;

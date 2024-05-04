@@ -6,9 +6,11 @@ import type { RequestWithUser } from '@/types/extended-request.type';
 import type {
   CreateCryptoPaymentResponse,
   GenerateTonPaymentCodeResponse,
+  EditReceivingAddressResponse,
   SaleExtended,
 } from '@/types/sale-response.type';
 import Api from '@/lib/api';
+import { HttpBadRequestError } from '@/lib/errors';
 
 export default class SaleController extends Api {
   private readonly saleService = new SaleService();
@@ -89,4 +91,72 @@ export default class SaleController extends Api {
       next(e);
     }
   };
+
+  public editReceivingAddress = async (
+    req: RequestWithUser,
+    res: CustomResponse<EditReceivingAddressResponse>,
+    next: NextFunction
+  ) => {
+    try {
+      const updatedUserAddressInfo = this.saleService.editReceivingAddress(
+        req.params.saleName,
+        req.user.telegramId,
+        req.body.newReceivingAddress
+      );
+      this.send(
+        res,
+        updatedUserAddressInfo,
+        HttpStatusCode.Accepted,
+        `Receiving address updated for sale: ${req.params.saleName}`
+      );
+    } catch (e) {
+      next(e);
+    }
+  };
+
+  public toggleEditReceivingAddress = async (
+    req: Request,
+    res: CustomResponse<EditReceivingAddressResponse>,
+    next: NextFunction
+  ) => {
+    try {
+      await this.saleService.toggleEditReceivingAddress(
+        req.params.saleName,
+        SaleController.parseBooleanString(
+          req.query.allow as string | undefined,
+          'allow'
+        )
+      );
+
+      this.send(
+        res,
+        undefined,
+        HttpStatusCode.Accepted,
+        `Receiving address updated for sale: ${req.params.saleName}`
+      );
+    } catch (e) {
+      next(e);
+    }
+  };
+
+  private static parseBooleanString(boolString?: string, paramName?: string) {
+    if (!boolString) {
+      throw new HttpBadRequestError('Invalid parameter', [
+        'Missing parameter' + (paramName ? `: ${paramName}` : ''),
+        'Should be set to "true" or "false"',
+      ]);
+    }
+
+    switch (boolString.toLowerCase()) {
+      case 'true':
+        return true;
+      case 'false':
+        return false;
+      default:
+        throw new HttpBadRequestError(
+          'Invalid parameter' + (paramName ? `: ${paramName}` : ''),
+          [boolString, 'Should be set to "true" or "false"']
+        );
+    }
+  }
 }

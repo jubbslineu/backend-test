@@ -2,6 +2,7 @@
 import { createHash } from 'crypto';
 import { type Coin, type CryptoCurrency, type Currency } from './types';
 import type {
+  EditReceivingAddressResponse,
   SaleResponseObject,
   SaleExtended,
 } from '@/types/sale-response.type';
@@ -38,6 +39,12 @@ interface SaleInitParams {
   tokensPerPhase: number[];
   initialPrice: number;
   priceIncrementPerPhase: number;
+}
+
+interface PurchasewithCryptoBody {
+  amount: number;
+  userEmail?: string;
+  paymentCurrency: PaymentMethod;
 }
 
 interface PaymentRequestBody {
@@ -81,7 +88,10 @@ export default class SaleService {
       : this.convertToSaleResponse(newSale);
   }
 
-  public async createCryptoPayment(user: User, body: any): Promise<string> {
+  public async createCryptoPayment(
+    user: User,
+    body: PurchasewithCryptoBody
+  ): Promise<string> {
     // get active sale
     const activeSale = await this.currentActiveSale();
 
@@ -112,6 +122,8 @@ export default class SaleService {
         {
           customer_id: user.telegramId,
           customer_email: body.userEmail ?? environment.defaultCustomerEmail,
+          title: environment.changellyCryptoPaymentTitle,
+          description: environment.changellyCryptoPaymentDescription,
           order_id: paymentCode,
           nominal_currency: 'USDT',
           nominal_amount: totalPrice.toFixed(2),
@@ -126,7 +138,7 @@ export default class SaleService {
       /* const newRequest = */ await this.createNewPaymentRequest(
         activeSale,
         user.telegramId,
-        body.paymentMethod.currency,
+        body.paymentCurrency,
         seqNo,
         body.amount,
         environment.changellyPaymentReceiver,
@@ -310,6 +322,76 @@ export default class SaleService {
       lowerLimit: upperLimit - sale.tokensPerPhase[currentPhase - 1],
       upperLimit,
     };
+  }
+
+  public async editReceivingAddress(
+    saleName: string,
+    telegramId: string,
+    newAddress: string
+  ): Promise<EditReceivingAddressResponse> {
+    const sale = await prisma.sale.findUnique({
+      where: {
+        name: saleName,
+      },
+    });
+
+    if (!sale) {
+      throw new HttpNotFoundError('Failed editing receiving address', [
+        `Sale with name ${saleName} not found`,
+      ]);
+    }
+
+    if (!sale.isReceivingAddressEditable) {
+      throw new HttpBadRequestError('Failed editing receiving address', [
+        'Editing not allowed',
+      ]);
+    }
+
+    try {
+      await prisma.merkleEntry.update({
+        where: {
+          id: {
+            telegramId,
+            saleName,
+          },
+        },
+        data: {
+          address: newAddress,
+        },
+      });
+    } catch (e) {
+      throw new HttpBadRequestError('Failed editing receiving address', [
+        e.message,
+        e.code,
+      ]);
+    }
+
+    return {
+      saleName,
+      telegramId,
+      receivingAddress: newAddress,
+    };
+  }
+
+  public async toggleEditReceivingAddress(
+    saleName: string,
+    allow: boolean
+  ): Promise<void> {
+    try {
+      await prisma.sale.update({
+        where: {
+          name: saleName,
+        },
+        data: {
+          isReceivingAddressEditable: allow,
+        },
+      });
+    } catch (e) {
+      throw new HttpBadRequestError('Failed grating allowance', [
+        e.message,
+        e.code,
+      ]);
+    }
   }
 
   private calculateTokenPrice(sale: Sale, currentPhase?: number): Decimal {
