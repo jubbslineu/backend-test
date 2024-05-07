@@ -7,13 +7,12 @@ import {
   IsDecimal,
   isDecimal,
   IsEmail,
-  IsEnum,
+  IsInt,
   ValidatorConstraint,
   type ValidatorConstraintInterface,
   type ValidationArguments,
   IsOptional,
 } from 'class-validator';
-import { PaymentMethod } from '@/lib/prisma';
 
 @ValidatorConstraint({ name: 'TokensPerPhaseValidator', async: false })
 export class TokensPerPhaseConstraint implements ValidatorConstraintInterface {
@@ -68,13 +67,10 @@ export class StartNewDto {
 }
 
 export class PurchaseWithCryptoDto {
-  @IsNumber()
+  @IsInt()
   amount!: number;
 
   @IsOptional()
   @IsEmail()
   userEmail: string;
-
-  @IsEnum(PaymentMethod)
-  paymentCurrency!: PaymentMethod;
 }

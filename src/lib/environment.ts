@@ -35,7 +35,7 @@ class Environment implements IEnvironment {
   private _changellyFiatPrivKey: string;
   private _changellyFiatCallbackPubKey: string;
   private _changellyCryptoPrivKey: string;
-  private _changellyCryptoPubKey: string;
+  private _changellyCryptoApiKey: string;
   private _changellyCryptoCallbackPubKey: string;
   private _changellyCryptoPaymentTitle: string;
   private _changellyCryptoPaymentDescription: string;
@@ -173,12 +173,12 @@ class Environment implements IEnvironment {
     this._changellyCryptoPrivKey = value;
   }
 
-  get changellyCryptoPubKey() {
-    return this._changellyCryptoPubKey;
+  get changellyCryptoApiKey() {
+    return this._changellyCryptoApiKey;
   }
 
-  set changellyCryptoPubKey(value) {
-    this._changellyCryptoPubKey = value;
+  set changellyCryptoApiKey(value) {
+    this._changellyCryptoApiKey = value;
   }
 
   get changellyCryptoCallbackPubKey() {
@@ -315,7 +315,7 @@ class Environment implements IEnvironment {
     this.changellyFiatPrivKey = env.CHANGELLY_FIAT_PRIV_KEY;
     this.changellyFiatCallbackPubKey = env.CHANGELLY_FIAT_CALLBACK_PUB_KEY;
     this.changellyCryptoPrivKey = env.CHANGELLY_CRYPTO_PRIV_KEY;
-    this.changellyCryptoPubKey = env.CHANGELLY_CRYPTO_PUB_KEY;
+    this.changellyCryptoApiKey = env.CHANGELLY_CRYPTO_API_KEY;
     this.changellyCryptoCallbackPubKey = env.CHANGELLY_CRYPTO_CALLBACK_PUB_KEY;
     this.defaultCustomerEmail = env.DEFAULT_CUSTOMER_EMAIL;
     this.changellyFeesPayer = env.CHANGELLY_FEES_PAYER;

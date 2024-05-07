@@ -22,8 +22,8 @@ import prisma, {
   type Sale,
 } from '@/lib/prisma';
 import {
-  ChangellyClient,
-  ApiOptions,
+  changellyClientCrypto,
+  changellyClientFiat,
   CryptoEndpoints,
 } from '@/lib/changelly-client';
 
@@ -44,7 +44,6 @@ interface SaleInitParams {
 interface PurchasewithCryptoBody {
   amount: number;
   userEmail?: string;
-  paymentCurrency: PaymentMethod;
 }
 
 interface PaymentRequestBody {
@@ -54,9 +53,8 @@ interface PaymentRequestBody {
 type SaleParam = string | Sale;
 
 export default class SaleService {
-  private readonly _cryptoPaymentClient = new ChangellyClient(
-    ApiOptions.CRYPTO
-  );
+  private readonly _cryptoPaymentClient = changellyClientCrypto;
+  private readonly _fiatPaymentClient = changellyClientFiat;
 
   public async startNew(
     init: SaleInitParams,
@@ -84,19 +82,20 @@ export default class SaleService {
     });
 
     return returnExtended
-      ? this.extendSaleProperties(newSale)
-      : this.convertToSaleResponse(newSale);
+      ? this._extendSaleProperties(newSale)
+      : this._convertToSaleResponse(newSale);
   }
 
   public async createCryptoPayment(
-    user: User,
+    user: any,
     body: PurchasewithCryptoBody
   ): Promise<string> {
     // get active sale
-    const activeSale = await this.currentActiveSale();
+    const activeSale = await this._currentActiveSale();
+    user = { telegramId: '111111111' };
 
     // get user SeqNo
-    const seqNo = await this.getNextAvailableSeqNo(
+    const seqNo = await this._getNextAvailableSeqNo(
       activeSale.name,
       user.telegramId
     );
@@ -109,7 +108,7 @@ export default class SaleService {
     );
 
     // get total price
-    const totalPrice = this.calculateTotalPrice(body.amount, activeSale);
+    const totalPrice = this._calculateTotalPrice(body.amount, activeSale);
 
     const expireDate = new Date(
       this._cryptoPaymentClient.getExpirationTimestampSeconds() * 1000
@@ -131,14 +130,18 @@ export default class SaleService {
           pending_deadline_at: expireDate,
           success_redirect_url: environment.changellySuccessUrl,
           failure_redirect_url: environment.changellyFailUrl,
+        },
+        undefined,
+        {
+          expiration: expireDate.getSeconds(),
         }
       );
 
       // create payment request
-      /* const newRequest = */ await this.createNewPaymentRequest(
+      /* const newRequest = */ await this._createNewPaymentRequest(
         activeSale,
         user.telegramId,
-        body.paymentCurrency,
+        PaymentMethod.CHANGELLY_CRYPTO,
         seqNo,
         body.amount,
         environment.changellyPaymentReceiver,
@@ -159,22 +162,22 @@ export default class SaleService {
   }
 
   public async getActiveSale(extended: boolean = false): Promise<SaleExtended> {
-    const activeSale = await this.currentActiveSale();
+    const activeSale = await this._currentActiveSale();
 
     if (extended) {
-      return this.extendSaleProperties(activeSale);
+      return this._extendSaleProperties(activeSale);
     }
 
-    return this.convertToSaleResponse(activeSale);
+    return this._convertToSaleResponse(activeSale);
   }
 
   public async generateTonPaymentCode(
     user: User,
     body: PaymentRequestBody
   ): Promise<string> {
-    const activeSale = await this.currentActiveSale();
+    const activeSale = await this._currentActiveSale();
 
-    await this.cancelAllExpiredRequests(activeSale.name, PaymentMethod.TON);
+    await this._cancelAllExpiredRequests(activeSale.name, PaymentMethod.TON);
 
     const activeRequest = await prisma.paymentRequest.findFirst({
       where: {
@@ -190,11 +193,11 @@ export default class SaleService {
       ]);
     }
 
-    const newRequest = await this.createNewPaymentRequest(
+    const newRequest = await this._createNewPaymentRequest(
       activeSale,
       user.telegramId,
       PaymentMethod.TON,
-      await this.getNextAvailableSeqNo(activeSale.name, user.telegramId),
+      await this._getNextAvailableSeqNo(activeSale.name, user.telegramId),
       body.amount,
       environment.tonPaymentDestinationAddress,
       {
@@ -206,7 +209,7 @@ export default class SaleService {
   }
 
   public async pauseSale(): Promise<SaleResponseObject> {
-    const activeSale = await this.currentActiveSale();
+    const activeSale = await this._currentActiveSale();
 
     const updatedSale = await prisma.sale.update({
       where: {
@@ -218,11 +221,11 @@ export default class SaleService {
       },
     });
 
-    return this.convertToSaleResponse(updatedSale);
+    return this._convertToSaleResponse(updatedSale);
   }
 
   public async resumeSale(sale: SaleParam): Promise<Sale> {
-    const activeSale = await this.currentActiveSale();
+    const activeSale = await this._currentActiveSale();
     if (activeSale) {
       throw new HttpBadRequestError('Sale is ongoing', [
         `Sale with name ${activeSale.name} is active`,
@@ -260,7 +263,7 @@ export default class SaleService {
 
   public async totalPausedTime(sale?: SaleParam): Promise<number> {
     if (!sale) {
-      sale = await this.currentActiveSale();
+      sale = await this._currentActiveSale();
     } else if (typeof sale === 'string') {
       sale = await this.getSalebyName(sale);
     }
@@ -274,7 +277,7 @@ export default class SaleService {
 
   public async getSaleElapsedTime(sale?: SaleParam): Promise<number> {
     if (!sale) {
-      sale = await this.currentActiveSale();
+      sale = await this._currentActiveSale();
     } else {
       if (typeof sale === 'string') {
         sale = await this.getSalebyName(sale);
@@ -292,24 +295,23 @@ export default class SaleService {
 
   public async getCurrentSalePrice(sale?: SaleParam): Promise<string> {
     if (!sale) {
-      sale = await this.currentActiveSale();
+      sale = await this._currentActiveSale();
     } else if (typeof sale === 'string') {
       sale = await this.getSalebyName(sale);
     }
 
-    return this.calculateTokenPrice(sale).toFixed(2);
+    return this._calculateTokenPrice(sale).toFixed(2);
   }
 
-  public getCurrentPhaseStats(sale: Sale): PhaseStats {
+  private getCurrentPhaseStats(sale: Sale): PhaseStats {
     let currentPhase = 0;
+
+    const totalLocked = sale.totalSold + sale.pendingOrderAmount;
     const upperLimit = sale.tokensPerPhase
       .slice(0)
       .reduce((phaseTokenLowerbound, phaseTokenIncrement, phase, arr) => {
         const phaseTokenUpperbound = phaseTokenLowerbound + phaseTokenIncrement;
-        if (
-          phase >= sale.phases ||
-          sale.totalSold + sale.pendingOrderAmount <= phaseTokenUpperbound
-        ) {
+        if (phase >= sale.phases || totalLocked <= phaseTokenUpperbound) {
           arr.splice(1);
           currentPhase = phase;
         }
@@ -394,7 +396,7 @@ export default class SaleService {
     }
   }
 
-  private calculateTokenPrice(sale: Sale, currentPhase?: number): Decimal {
+  private _calculateTokenPrice(sale: Sale, currentPhase?: number): Decimal {
     if (!currentPhase) {
       currentPhase = this.getCurrentPhaseStats(sale).phase;
     }
@@ -406,9 +408,9 @@ export default class SaleService {
     );
   }
 
-  private calculateTotalPrice(amount: number, sale: Sale): Decimal {
+  private _calculateTotalPrice(amount: number, sale: Sale): Decimal {
     let { phase: currentPhase, upperLimit } = this.getCurrentPhaseStats(sale);
-    let tokenPrice = this.calculateTokenPrice(sale, currentPhase);
+    let tokenPrice = this._calculateTokenPrice(sale, currentPhase);
 
     let totalPrice = new Decimal(0);
     let tokensFilled = sale.totalSold + sale.pendingOrderAmount;
@@ -427,13 +429,10 @@ export default class SaleService {
       tokenPrice = tokenPrice.add(sale.priceIncrement[currentPhase - 2]);
     }
 
-    totalPrice = totalPrice.add(tokenPrice.mul(amount));
-    tokensFilled += amount;
-
-    return totalPrice;
+    return totalPrice.add(tokenPrice.mul(amount));
   }
 
-  private extendSaleProperties(sale: Sale): SaleExtended {
+  private _extendSaleProperties(sale: Sale): SaleExtended {
     const phaseStats = this.getCurrentPhaseStats(sale);
     const tokensForSale = sale.tokensPerPhase.reduce((sum, curr) => sum + curr);
     const tokensFilled = sale.totalSold + sale.pendingOrderAmount;
@@ -445,14 +444,16 @@ export default class SaleService {
       currentPhase: phaseStats.phase,
       lowerTokenLimit: phaseStats.lowerLimit,
       upperTokenLimit: phaseStats.upperLimit,
-      currentPrice: this.calculateTokenPrice(sale, phaseStats.phase).toFixed(2),
+      currentPrice: this._calculateTokenPrice(sale, phaseStats.phase).toFixed(
+        2
+      ),
       tokensForSale,
       remainingTokens: tokensForSale - tokensFilled,
       remainingPhaseTokens: phaseStats.upperLimit - tokensFilled,
     };
   }
 
-  private convertToSaleResponse(sale: Sale): SaleResponseObject {
+  private _convertToSaleResponse(sale: Sale): SaleResponseObject {
     return {
       ...sale,
       initialPrice: sale.initialPrice.toFixed(2),
@@ -460,7 +461,7 @@ export default class SaleService {
     };
   }
 
-  private async currentActiveSale(): Promise<Sale> {
+  private async _currentActiveSale(): Promise<Sale> {
     const activeSale = await this._getActiveSale();
 
     if (!activeSale) {
@@ -472,7 +473,7 @@ export default class SaleService {
     return activeSale;
   }
 
-  private async convertCurrency(
+  private async _convertCurrency(
     amount: number,
     from: Currency = 'USD',
     to: CryptoCurrency = 'TON'
@@ -505,7 +506,7 @@ export default class SaleService {
     return result;
   }
 
-  private async cancelAllExpiredRequests(
+  private async _cancelAllExpiredRequests(
     saleName: string,
     paymentMethod?: PaymentMethod
   ) {
@@ -545,7 +546,7 @@ export default class SaleService {
     });
   }
 
-  private async getNextAvailableSeqNo(
+  private async _getNextAvailableSeqNo(
     saleName: string,
     telegramId: string
   ): Promise<number> {
@@ -559,7 +560,7 @@ export default class SaleService {
     return seqNo;
   }
 
-  private async createNewPaymentRequest(
+  private async _createNewPaymentRequest(
     activeSale: Sale,
     telegramId: string,
     paymentMethod: PaymentMethod,
@@ -576,7 +577,7 @@ export default class SaleService {
     // calculate total purchase price
     const totalPrice =
       override?.totalPrice ??
-      this.calculateTotalPrice(amount, activeSale).toNumber();
+      this._calculateTotalPrice(amount, activeSale).toNumber();
 
     // create new payment request instance
     const newRequest = await prisma.paymentRequest.create({
@@ -592,7 +593,7 @@ export default class SaleService {
         destination,
         amount,
         price: override?.convertTo
-          ? await this.convertCurrency(totalPrice, 'USD', override.convertTo)
+          ? await this._convertCurrency(totalPrice, 'USD', override.convertTo)
           : totalPrice,
         code:
           override?.paymentCode ??

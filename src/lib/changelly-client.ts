@@ -50,20 +50,35 @@ interface ChangellyApiResponse {
   expiration: number;
 }
 
+type RsaKeyType = 'public' | 'private';
+
+const getRsaAffix = (keyType: RsaKeyType) => ({
+  prefix: `-----BEGIN RSA ${keyType.toUpperCase()} KEY-----\n`,
+  suffix: `-----END RSA ${keyType.toUpperCase()} KEY-----\n`,
+});
+
 const wrapRsaPrivateKey = (rsaPrivKey: string): string => {
-  return `
------BEGIN PRIVATE KEY-----
-${rsaPrivKey}
------END PRIVATE KEY-----
-`;
+  const affixes = getRsaAffix('private');
+  if (!rsaPrivKey.startsWith(affixes.prefix)) {
+    rsaPrivKey = affixes.prefix + rsaPrivKey;
+  }
+
+  if (!rsaPrivKey.endsWith(affixes.suffix)) {
+    rsaPrivKey = rsaPrivKey + affixes.suffix;
+  }
+  return rsaPrivKey;
 };
 
 const wrapRsaPublicKey = (rsaPubKey: string): string => {
-  return `
------BEGIN PUBLIC KEY-----
-${rsaPubKey}
------END PUBLIC KEY-----
-`;
+  const affixes = getRsaAffix('public');
+  if (!rsaPubKey.startsWith(affixes.prefix)) {
+    rsaPubKey = affixes.prefix + rsaPubKey;
+  }
+
+  if (!rsaPubKey.endsWith(affixes.suffix)) {
+    rsaPubKey = rsaPubKey + affixes.suffix;
+  }
+  return rsaPubKey;
 };
 
 const signPayloadCrypto = (
@@ -78,7 +93,6 @@ const signPayloadCrypto = (
   const bodyBase64 =
     bodyJson !== '{}' ? Buffer.from(bodyJson).toString('base64') : '';
   const payload = [method.toString(), path, bodyBase64, expiration].join(':');
-
   const signature = Buffer.from(
     [
       crypto.sign(
@@ -131,11 +145,11 @@ const verifyCallbackSignatureCrypto = (
   signatureHeader?: string
 ): boolean => {
   if (!signatureHeader) {
-    throw new HttpInternalServerError('CRYPTO callback verifycation failed', [
+    throw new HttpInternalServerError('CRYPTO callback verification failed', [
       ChangellyErrorType.BAD_REQUEST,
       ChangellyErrorReason.INVALID_REQUEST_HEADER,
       'Signature missing',
-      'X-Callback-Signature',
+      `X-Signature`,
     ]);
   }
 
@@ -200,12 +214,12 @@ export const verifyCallbackSignature = (
 ): boolean => {
   return switchApiOptions({
     [ApiOptions.CRYPTO]: () =>
-      verifyCallbackSignatureCrypto(body, header['X-Signature']),
+      verifyCallbackSignatureCrypto(body, header['x-signature']),
     [ApiOptions.FIAT]: () =>
       verifyCallbackSignatureFiat(
         body,
-        header['X-Callback-Signature'],
-        header['X-Callback-Api-Key']
+        header['x-callback-signature'],
+        header['x-Callback-api-key']
       ),
   })[apiOption];
 };
@@ -215,7 +229,7 @@ const switchOptions = <E extends OptionType, T>(
   actions: Record<E, T>,
   params?: Record<E, any[]>
 ): Record<string, T> => {
-  const enumOptions = Object.keys(optionsEnum);
+  const enumOptions = Object.values(optionsEnum);
   return new Proxy(
     Object.fromEntries(
       enumOptions.map((option) => {
@@ -264,7 +278,8 @@ export class ChangellyClient {
   private readonly _signPayload: (
     method: HttpMethod,
     body: object,
-    path: string
+    path: string,
+    expiration: number
   ) => SignPayloadResult;
 
   private readonly _initialHeader: Record<string, string>;
@@ -275,6 +290,7 @@ export class ChangellyClient {
     headers = ChangellyClient._getInitialHeader(apiOption),
     expireInterval = environment.paymentRequestExpireIn
   ) {
+    this._expireInterval = expireInterval.toString();
     this._client = axios.create({
       baseURL: ChangellyClient._getBaseUrl(apiOption),
       timeout,
@@ -287,11 +303,9 @@ export class ChangellyClient {
     );
     this._signPayload = ChangellyClient._signPayload.bind(
       undefined,
-      this._apiOption,
-      this.getExpirationTimestampSeconds
+      this._apiOption
     );
     this._initialHeader = headers;
-    this._expireInterval = expireInterval.toString();
   }
 
   get apiOption() {
@@ -306,6 +320,10 @@ export class ChangellyClient {
     this._expireInterval = value;
   }
 
+  public pingClient(): any {
+    return this._client.request({ url: 'any' });
+  }
+
   public getExpirationTimestampSeconds(): number {
     return Date.now() / 1000 + +this.expireInterval;
   }
@@ -313,13 +331,15 @@ export class ChangellyClient {
   public async fetch(
     endpoint: ChangellyEndpoint,
     body?: object,
-    pathParams?: object
+    pathParams?: object,
+    options?: Record<string, any>
   ): Promise<ChangellyApiResponse> {
     const method = this._getEndpointMethod(endpoint);
     const { expiration, signature } = this._signPayload(
       method,
       body ?? {},
-      endpoint.toString()
+      endpoint.toString(),
+      options?.expiration ?? this.getExpirationTimestampSeconds()
     );
 
     const response = await (async () => {
@@ -373,7 +393,7 @@ export class ChangellyClient {
   private static _getInitialHeader(apiOption: ApiOptions) {
     return {
       'X-Api-Key': switchApiOptions({
-        [ApiOptions.CRYPTO]: environment.changellyCryptoPubKey,
+        [ApiOptions.CRYPTO]: environment.changellyCryptoApiKey,
         [ApiOptions.FIAT]: environment.changellyFiatApiKey,
       })[apiOption],
     };
@@ -384,12 +404,12 @@ export class ChangellyClient {
     method: HttpMethod,
     body: object,
     path: string,
-    expiration: () => number
+    expiration: number
   ): SignPayloadResult {
     return switchApiOptions({
       [ApiOptions.CRYPTO]: () =>
-        signPayloadCrypto(method, body, path, expiration()),
-      [ApiOptions.FIAT]: () => signPayloadFiat(body, path, expiration()),
+        signPayloadCrypto(method, body, path, expiration),
+      [ApiOptions.FIAT]: () => signPayloadFiat(body, path, expiration),
     })[apiOption];
   }
 
@@ -422,3 +442,6 @@ export class ChangellyClient {
     return path;
   }
 }
+
+export const changellyClientCrypto = new ChangellyClient(ApiOptions.CRYPTO);
+export const changellyClientFiat = new ChangellyClient(ApiOptions.FIAT);

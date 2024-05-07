@@ -1,12 +1,27 @@
+import crypto from 'crypto';
 import request from 'supertest';
 import { type ApiResponse } from '../../types/util-types';
 import App from '../../../src/app';
-import prismaClient, { Prisma } from '../../../src/lib/prisma';
+import prismaClient, {
+  Prisma,
+  PaymentRequestStatus,
+} from '../../../src/lib/prisma';
+import environment from '../../../src/lib/environment';
+import { changellyClientCrypto } from '../../../src/lib/changelly-client';
+import {
+  getPaymentRequestSeqNo,
+  calculateOrderTotalPrice,
+  createPaymentCodeSync,
+} from '../utils/common';
 import {
   seedAdminData,
   buyerUserData,
   startNewSaleBody,
   adminAuthenticateBody,
+  buyerAuthenticateBody,
+  purchaseWithCryptoBody,
+  changellyCreatePaymentMockResponse,
+  cryptoCallbackBody,
 } from '../../data/purchase-with-crypto';
 
 /**
@@ -18,12 +33,40 @@ import {
  * @ref https://katalon.com/resources-center/blog/end-to-end-e2e-testing
  */
 
+jest.mock('axios', () => ({
+  ...jest.requireActual('axios'),
+  create: (...args: any[]) => jest.requireMock('axios'),
+  request: async (...args: any[]) =>
+    await Promise.resolve(changellyCreatePaymentMockResponse),
+}));
+
+const getBuyerOrder = async (seqNo?: number) => {
+  if (!seqNo) {
+    seqNo =
+      (await getPaymentRequestSeqNo(
+        buyerUserData.telegramId,
+        startNewSaleBody.name
+      )) - 1;
+  }
+
+  return await prismaClient.paymentRequest.findUnique({
+    where: {
+      id: {
+        telegramId: buyerUserData.telegramId,
+        saleName: startNewSaleBody.name,
+        seqNo,
+      },
+    },
+  });
+};
+
 describe('[e2e] - purchase-with-crypto', () => {
   const seedUsers = [seedAdminData, buyerUserData];
   const env = process.env.NODE_ENV;
   const app = new App().express;
 
   let adminJwtToken: string;
+  let buyerJwtToken: string;
 
   const clearDB = async () => {
     // delete test sale
@@ -64,13 +107,22 @@ describe('[e2e] - purchase-with-crypto', () => {
     });
 
     // get admin JWT token
-    const response = await request(app)
+    let response = await request(app)
       .post(`/api/v1/${env}/users/authenticate`)
       .set('Accept', 'application/json')
       .send(adminAuthenticateBody);
 
-    const { data } = response.body as ApiResponse<{ token: string }>;
+    let { data } = response.body as ApiResponse<{ token: string }>;
     adminJwtToken = data.token;
+
+    // get buyer JWT
+    response = await request(app)
+      .post(`/api/v1/${env}/users/authenticate`)
+      .set('Accept', 'application/json')
+      .send(buyerAuthenticateBody);
+
+    ({ data } = response.body as ApiResponse<{ token: string }>);
+    buyerJwtToken = data.token;
 
     // create sale
     await request(app)
@@ -91,17 +143,139 @@ describe('[e2e] - purchase-with-crypto', () => {
   });
 
   it('{/sale/purchase-with-crypto} (SUCCESS): User creates crypto payment', async () => {
-    // TODO: create crypto payment with '/sale/purchase-with-crypto'
-    // Mock 'axios.request' to return a successful response (same format as the response from changelly)
-    // Create request RSA key pairs and mock environment.changellyCryptoPrivKey with private key
-    // Call endpoint and check response with "expect" function
+    // generate Changelly API key pair mock
+    const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
+      modulusLength: 2048,
+    });
+
+    // mock public key
+    jest.spyOn(environment, 'changellyCryptoApiKey', 'get').mockReturnValue(
+      publicKey
+        .export({
+          type: 'pkcs1',
+          format: 'pem',
+        })
+        .toString('base64')
+    );
+
+    // mock private key
+    jest.spyOn(environment, 'changellyCryptoPrivKey', 'get').mockReturnValue(
+      privateKey
+        .export({
+          type: 'pkcs1',
+          format: 'pem',
+        })
+        .toString('base64')
+    );
+
+    // spy on getExpirationTimestampSeconds method for later assetions
+    const expirationTimestamp =
+      changellyClientCrypto.getExpirationTimestampSeconds();
+    const expireAtSpy = jest
+      .spyOn(changellyClientCrypto, 'getExpirationTimestampSeconds')
+      .mockReturnValueOnce(expirationTimestamp);
+
+    const seqNo = await getPaymentRequestSeqNo(
+      buyerUserData.telegramId,
+      startNewSaleBody.name
+    );
+
+    // purchase with crypto
+    const response = await request(app)
+      .post(`/api/v1/${env}/sale/purchase-with-crypto`)
+      .set('Accept', 'application/json')
+      .set('Authorization', buyerJwtToken)
+      .send(purchaseWithCryptoBody);
+
+    expect(response.status).toEqual(201);
+    expect(response.body.data.paymentUrl).toEqual(
+      changellyCreatePaymentMockResponse.data.payment_url
+    );
+
+    const paymentRequest = await getBuyerOrder(seqNo);
+
+    expect(paymentRequest).not.toBeNull();
+    expect(paymentRequest!.code).toEqual(
+      createPaymentCodeSync(
+        buyerUserData.telegramId,
+        startNewSaleBody.name,
+        seqNo
+      )
+    );
+    expect(paymentRequest!.amount).toEqual(purchaseWithCryptoBody.amount);
+    expect(paymentRequest!.destination).toEqual(
+      environment.changellyPaymentReceiver
+    );
+
+    expect(paymentRequest!.expireAt).toEqual(
+      new Date(+expireAtSpy.mock.results.at(-1)!.value * 1000)
+    );
+
+    expect(paymentRequest!.price).toEqual(
+      (
+        await calculateOrderTotalPrice(
+          startNewSaleBody.name,
+          purchaseWithCryptoBody.amount
+        )
+      ).toNumber()
+    );
+
+    expect(paymentRequest!.telegramId).toEqual(buyerUserData.telegramId);
+    expect(paymentRequest!.status).toEqual(PaymentRequestStatus.PENDING);
   });
 
-  it('{/callback/changelly-crypto-api-callback} (SUCCESS): Should validate user payment if state is "COMPLETED"', async () => {
-    // TODO: create crypto payment with '/callback/changelly-crypto-api-callback'
-    // Create callback RSA key pairs and mock environment.changellyCryptoCallbackPubKey with public key
-    // Call endpoint with body and X-Signature as specified here https://api.pay.changelly.com/#tag/Callbacks/operation/Callback
-    // state should be "COMPLETED", there're also "FAILED" and "CANCELED" to be tested in other "it"'s
-    // Check response if response has status code NoContent (204) and other database checks
+  it('{/callback/changelly-crypto-api-callback} (SUCCESS): Validates user payment after user made a payment"', async () => {
+    // generate Changelly API key pair mock
+    const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
+      modulusLength: 2048,
+    });
+
+    // mock private key
+    jest
+      .spyOn(environment, 'changellyCryptoCallbackPubKey', 'get')
+      .mockReturnValue(
+        publicKey
+          .export({
+            type: 'pkcs1',
+            format: 'pem',
+          })
+          .toString('base64')
+      );
+
+    const expiration = changellyClientCrypto.getExpirationTimestampSeconds();
+
+    const payload = Buffer.from(
+      `${JSON.stringify(cryptoCallbackBody)}:${expiration}`
+    );
+    const callbackSignature = crypto
+      .sign('RSA-SHA256', payload, privateKey)
+      .toString('base64');
+
+    const signatureHeader = Buffer.from(
+      [callbackSignature, expiration].join(':')
+    ).toString('base64');
+
+    // purchase with crypto
+    const response = await request(app)
+      .post(`/api/v1/${env}/callback/changelly-crypto-api-callback`)
+      .set('Accept', 'application/json')
+      .set('X-Signature', signatureHeader)
+      .send(cryptoCallbackBody);
+
+    expect(response.status).toEqual(204);
+
+    // check db
+    const paymentRequest = await getBuyerOrder();
+
+    expect(paymentRequest).not.toBeNull();
+    expect(paymentRequest!.status).toEqual(PaymentRequestStatus.PAID);
+  });
+
+  it('{/callback/changelly-crypto-api-callback} (SUCCESS): Cancel user payment order if payment FAILED"', async () => {
+    // TODO: Test ChangellyCryptoPaymentState.FAILED flow
+  });
+
+  it('{/callback/changelly-crypto-api-callback} (SUCCESS): Cancel user payment order if payment CANCELED"', async () => {
+    // TODO: Test ChangellyCryptoPaymentState.CANCELED flow
   });
 });

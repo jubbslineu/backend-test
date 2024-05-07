@@ -1422,3 +1422,1544 @@ Body:
   state: 'CANCELED',
   updated_at: '2023-03-22T15:23:56.876Z'
 }
+[test] 05-04-2024 20:05:59 info: Test info log message
+[test] 05-04-2024 20:05:59 error: Test error log message
+[test] 05-04-2024 20:05:14 info: Test info log message
+[test] 05-04-2024 20:05:15 error: Test error log message
+[test] 05-04-2024 20:05:35 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:50572',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-04-2024 20:05:56 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDg2NjgxNSwiZXhwIjoxNzE0OTUzMjE1fQ.6c99txhsy6A3f0xs-n9P1kGrHdSu6CO9fRp8kje01_M"
+}
+[test] 05-04-2024 20:05:58 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-04T23:53:35.578Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-04T23:53:35.578Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-04-2024 20:05:08 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDg2NzAwMiwiZXhwIjoxNzE0OTUzNDAyfQ.ITZXnO9NOfPMh8RAj9dUo6bZhQDVJbsQhtF4T1kUTLY"
+}
+[test] 05-04-2024 20:05:11 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-04T23:56:42.103Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-04T23:56:42.103Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-04-2024 21:05:23 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDg2NzI1MCwiZXhwIjoxNzE0OTUzNjUwfQ.6i7bKUjtHWmC80PubznL5t6mFUlxJQHGUEeYXnRCtYo"
+}
+[test] 05-04-2024 21:05:25 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-05T00:00:50.246Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-05T00:00:50.246Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-04-2024 21:05:09 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNDg2NzUwNywiZXhwIjoxNzE0OTUzOTA3fQ.JFjUUvsJotTsDWUJ-jI7YgfwlUOxwlJ6rtLHcWpMdwI"
+}
+[test] 05-04-2024 21:05:12 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-05T00:05:07.110Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-05T00:05:07.110Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-05-2024 15:05:48 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNDkzNTM2OCwiZXhwIjoxNzE1MDIxNzY4fQ.AdHJQVx3v88CI5xYvqdu5XzqnxhDKoVKs9JK7qebkTA"
+}
+[test] 05-05-2024 15:05:50 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-05T18:56:08.497Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-05T18:56:08.497Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-05-2024 15:05:11 info: Test info log message
+[test] 05-05-2024 15:05:11 error: Test error log message
+[test] 05-05-2024 15:05:13 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:64929',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111111' }
+[test] 05-05-2024 16:05:61 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNDkzNTY0MSwiZXhwIjoxNzE1MDIyMDQxfQ.0WoKT_XlP6ohXjOQgUGV3GQH5WipS7FJUcBUoXWbGpw"
+}
+[test] 05-05-2024 16:05:63 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-05T19:00:41.621Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-05T19:00:41.621Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-05-2024 16:05:58 info: Test info log message
+[test] 05-05-2024 16:05:59 error: Test error log message
+[test] 05-05-2024 16:05:60 error: Request Error:
+        
+Error:
+{"statusCode":400,"rawErrors":["User ID not found"]}
+        
+Headers:
+{
+  host: '127.0.0.1:65063',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  'content-type': 'application/json',
+  'content-length': '20',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ user: '111111110' }
+[test] 05-05-2024 16:05:89 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNDkzNTgwOSwiZXhwIjoxNzE1MDIyMjA5fQ.uivV_ydoddiCXhXMaNHgsu7z5W21thZLY2bcfB7RQ3Q"
+}
+[test] 05-05-2024 16:05:92 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-05T19:03:29.912Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-05T19:03:29.912Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-05-2024 16:05:92 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-05T19:03:29.912Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-05T19:03:29.912Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-05-2024 16:05:93 info: "10.00"
+[test] 05-05-2024 21:05:79 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNDk1NDkwMCwiZXhwIjoxNzE1MDQxMzAwfQ.sohVtBg-KJ_udWWcjRJ9TYNuOKp0Kl3FhRcQXYFZUvM"
+}
+[test] 05-05-2024 21:05:82 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T00:21:40.813Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T00:21:40.813Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-05-2024 21:05:30 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNDk1NTA2OSwiZXhwIjoxNzE1MDQxNDY5fQ.cKOF-ZGZh9UEU4hrVtFaXuNlfjjT7iiFApbEvhFslqU"
+}
+[test] 05-05-2024 21:05:32 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T00:24:29.318Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T00:24:29.318Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 07:05:99 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNDk5MjQ0MywiZXhwIjoxNzE1MDc4ODQzfQ.aKJfEKCXTWDbAN6t9q8ldNrejsZl5F1T3P7oXD33bcg"
+}
+[test] 05-06-2024 07:05:00 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T10:47:24.001Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T10:47:24.001Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 07:05:90 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNDk5MjQ5MiwiZXhwIjoxNzE1MDc4ODkyfQ.wWMhiIn4IYzhyxEW2Kf_JZgOXp9QmH15qVvLnz2l5j8"
+}
+[test] 05-06-2024 07:05:92 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T10:48:12.914Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T10:48:12.914Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 07:05:04 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNDk5MjUzMCwiZXhwIjoxNzE1MDc4OTMwfQ.KyZoAgk0I8sas717j7XL6nQyWzHuSSv5zHiL_jsjIbw"
+}
+[test] 05-06-2024 07:05:53 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNDk5MjU3NiwiZXhwIjoxNzE1MDc4OTc2fQ.KgfQnpvssThEhkjfVeISp68r8Qjvp2aMfy2ggn6jZKg"
+}
+[test] 05-06-2024 07:05:55 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T10:49:36.543Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T10:49:36.543Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 07:05:31 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNDk5MjYxOCwiZXhwIjoxNzE1MDc5MDE4fQ.J-RDoBLZ3TDaizE0oJotMZKldneCc02GMWg5L3OmBCE"
+}
+[test] 05-06-2024 07:05:34 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T10:50:18.331Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T10:50:18.331Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 18:05:39 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTAyOTUyNSwiZXhwIjoxNzE1MTE1OTI1fQ.gElzixm3hOjNg6KX6vnIRPS6VM6h0M-LKj1J-Gpp_6k"
+}
+[test] 05-06-2024 18:05:40 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAyOTUyNSwiZXhwIjoxNzE1MTE1OTI1fQ.klaxiznXPiScPWGNtaqQPly5Ajpm_AquxjtKZNB4BEw"
+}
+[test] 05-06-2024 18:05:42 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T21:05:25.415Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T21:05:25.415Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 18:05:72 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 18:05:39 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTAzMTY2NiwiZXhwIjoxNzE1MTE4MDY2fQ.-X5Ngltvhl8-KY_VsImKdc-M73K3bxwSyS_HH3yhlKQ"
+}
+[test] 05-06-2024 18:05:40 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzMTY2NiwiZXhwIjoxNzE1MTE4MDY2fQ.dbEuF1Xw5ucSxqCeK5ufoLsHsH24CgDuhHQ-KyINT7M"
+}
+[test] 05-06-2024 18:05:43 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T21:41:06.421Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T21:41:06.421Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 18:05:76 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 18:05:89 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:52116',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzMTY2NiwiZXhwIjoxNzE1MTE4MDY2fQ.dbEuF1Xw5ucSxqCeK5ufoLsHsH24CgDuhHQ-KyINT7M',
+  'content-type': 'application/json',
+  'content-length': '12',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ amount: 1 }
+[test] 05-06-2024 18:05:92 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTAzMjEwOCwiZXhwIjoxNzE1MTE4NTA4fQ.udpd3UuHIv_wTbOnYvRXlOmFxT8uogc1ZhweR_OZigc"
+}
+[test] 05-06-2024 18:05:93 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzMjEwOCwiZXhwIjoxNzE1MTE4NTA4fQ.SlIaiDcgXhQs20XyqlO8yvwHzqPos_aiTC1hQnEuARU"
+}
+[test] 05-06-2024 18:05:95 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T21:48:28.941Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T21:48:28.941Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 18:05:18 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 18:05:52 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:52209',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzMjEwOCwiZXhwIjoxNzE1MTE4NTA4fQ.SlIaiDcgXhQs20XyqlO8yvwHzqPos_aiTC1hQnEuARU',
+  'content-type': 'application/json',
+  'content-length': '12',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ amount: 1 }
+[test] 05-06-2024 18:05:14 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTAzMjMxMSwiZXhwIjoxNzE1MTE4NzExfQ.smSoCIwH2MY_xTWNZZGgVfOUJoT7AEoz7kIIDBPILhU"
+}
+[test] 05-06-2024 18:05:15 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzMjMxMSwiZXhwIjoxNzE1MTE4NzExfQ.utic_85CR4_JJ_Vklv_tjaXznlhDyQ09hm05J56zSJc"
+}
+[test] 05-06-2024 18:05:17 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T21:51:51.169Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T21:51:51.169Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 18:05:49 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 18:05:90 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:52245',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzMjMxMSwiZXhwIjoxNzE1MTE4NzExfQ.utic_85CR4_JJ_Vklv_tjaXznlhDyQ09hm05J56zSJc',
+  'content-type': 'application/json',
+  'content-length': '12',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ amount: 1 }
+[test] 05-06-2024 18:05:88 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTAzMjU5MSwiZXhwIjoxNzE1MTE4OTkxfQ.nd-8IBgxhMsFrb8GK39nBNr40B0TtnF_Rh3GHqH7wPw"
+}
+[test] 05-06-2024 18:05:89 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzMjU5MSwiZXhwIjoxNzE1MTE4OTkxfQ.8sDndHfR_rgzZJczJYPOagDZphaadOqY08EsiJmMrFI"
+}
+[test] 05-06-2024 18:05:92 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T21:56:31.906Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T21:56:31.906Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 18:05:06 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 18:05:55 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:52297',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzMjU5MSwiZXhwIjoxNzE1MTE4OTkxfQ.8sDndHfR_rgzZJczJYPOagDZphaadOqY08EsiJmMrFI',
+  'content-type': 'application/json',
+  'content-length': '12',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ amount: 1 }
+[test] 05-06-2024 19:05:68 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTAzMjk3MiwiZXhwIjoxNzE1MTE5MzcyfQ.jbtL88WYA8JNNke6qmNheAdRu3m-CIy9PiksuLn4gPk"
+}
+[test] 05-06-2024 19:05:69 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzMjk3MiwiZXhwIjoxNzE1MTE5MzcyfQ.x61y2DKb8z8ggJD-KzUxFtinrXqbAbDKQAU20UcDUrg"
+}
+[test] 05-06-2024 19:05:70 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T22:02:52.702Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T22:02:52.702Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 19:05:09 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 19:05:30 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:52386',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzMjk3MiwiZXhwIjoxNzE1MTE5MzcyfQ.x61y2DKb8z8ggJD-KzUxFtinrXqbAbDKQAU20UcDUrg',
+  'content-type': 'application/json',
+  'content-length': '12',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{ amount: 1 }
+[test] 05-06-2024 20:05:78 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTAzNzE0MCwiZXhwIjoxNzE1MTIzNTQwfQ.ATHEWXCFoncLZUmNY83xltL4lskyU_8_xDjmwLJk3Uk"
+}
+[test] 05-06-2024 20:05:79 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzNzE0MCwiZXhwIjoxNzE1MTIzNTQwfQ.dGVVDvA7BgbEcTDsA6vwdHinhPxnDZBAdbNrIwl27qM"
+}
+[test] 05-06-2024 20:05:80 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T23:12:20.797Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T23:12:20.797Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 20:05:11 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 20:05:24 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:52948',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzNzE0MCwiZXhwIjoxNzE1MTIzNTQwfQ.dGVVDvA7BgbEcTDsA6vwdHinhPxnDZBAdbNrIwl27qM',
+  'content-type': 'application/json',
+  'content-length': '97',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  customer_id: '111111111',
+  order_id: '34d3149b-8eb0-4898-971a-63464ae73f1e',
+  state: 'COMPLETED'
+}
+[test] 05-06-2024 20:05:15 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTAzNzU1MywiZXhwIjoxNzE1MTIzOTUzfQ.PS8k3mdwcDTEjXNzgX3_TmFvU5OATUiMYImHAt2u3Yk"
+}
+[test] 05-06-2024 20:05:16 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzNzU1MywiZXhwIjoxNzE1MTIzOTUzfQ.zRzHyWwsDH4GsW1Opi3jfjdiOjzjJL2k23yFms0JbBQ"
+}
+[test] 05-06-2024 20:05:18 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T23:19:13.176Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T23:19:13.176Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 20:05:34 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 20:05:51 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:53018',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzNzU1MywiZXhwIjoxNzE1MTIzOTUzfQ.zRzHyWwsDH4GsW1Opi3jfjdiOjzjJL2k23yFms0JbBQ',
+  'content-type': 'application/json',
+  'content-length': '97',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  customer_id: '111111111',
+  order_id: '34d3149b-8eb0-4898-971a-63464ae73f1e',
+  state: 'COMPLETED'
+}
+[test] 05-06-2024 20:05:05 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTAzNzU5OSwiZXhwIjoxNzE1MTIzOTk5fQ._AS_2Ow6g324fCmrE3z1MIhDBWbS7gXeWfFBwEUyDZQ"
+}
+[test] 05-06-2024 20:05:06 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzNzU5OSwiZXhwIjoxNzE1MTIzOTk5fQ.CWDLPWtlDd0poAB_D3_j4msu6T_vpLoNrJ_bo8n9ihU"
+}
+[test] 05-06-2024 20:05:07 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T23:19:59.068Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T23:19:59.068Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 20:05:27 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 20:05:48 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:53035',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzNzU5OSwiZXhwIjoxNzE1MTIzOTk5fQ.CWDLPWtlDd0poAB_D3_j4msu6T_vpLoNrJ_bo8n9ihU',
+  'content-type': 'application/json',
+  'content-length': '97',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  customer_id: '111111111',
+  order_id: '34d3149b-8eb0-4898-971a-63464ae73f1e',
+  state: 'COMPLETED'
+}
+[test] 05-06-2024 20:05:82 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTAzNzc2MywiZXhwIjoxNzE1MTI0MTYzfQ.JnLcZUqkqqktSouoSErYLPzPGgmJhZdxuN7T1-dp1AM"
+}
+[test] 05-06-2024 20:05:83 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzNzc2MywiZXhwIjoxNzE1MTI0MTYzfQ.CiKPiIjvDhUXBWaV3Y-hpu-tdY60bLwqNNGP7hFjLLQ"
+}
+[test] 05-06-2024 20:05:84 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-06T23:22:43.840Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-06T23:22:43.840Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 20:05:99 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 20:05:32 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:53067',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTAzNzc2MywiZXhwIjoxNzE1MTI0MTYzfQ.CiKPiIjvDhUXBWaV3Y-hpu-tdY60bLwqNNGP7hFjLLQ',
+  'content-type': 'application/json',
+  'content-length': '97',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  customer_id: '111111111',
+  order_id: '34d3149b-8eb0-4898-971a-63464ae73f1e',
+  state: 'COMPLETED'
+}
+[test] 05-06-2024 23:05:54 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTA1MDI4NiwiZXhwIjoxNzE1MTM2Njg2fQ.-x2t1BLCpbQOc1fzMrWA1LRhPQIV2YBhTwZir5zczEc"
+}
+[test] 05-06-2024 23:05:56 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTA1MDI4NiwiZXhwIjoxNzE1MTM2Njg2fQ.o5n_9OJN8yYVD-CL6aAcndzxZPwm5aNHFpvhQeFYgUw"
+}
+[test] 05-06-2024 23:05:57 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-07T02:51:26.570Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-07T02:51:26.570Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 23:05:91 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 23:05:10 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:54235',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTA1MDI4NiwiZXhwIjoxNzE1MTM2Njg2fQ.o5n_9OJN8yYVD-CL6aAcndzxZPwm5aNHFpvhQeFYgUw',
+  'x-callback-signature': 'FKZbz/kRMAbgs61uhDJHPO86E6jBnDLs4Q1RUC4wPkHS7KneTANYMdetXu9AGJ/fwOoFM/qS8Dw4rfbgCgQNoJJwyYLPM4x/otX2UVSEKvMkyU/qAHvjmhDqXuHjOeZoor1+sUYrfOsQ/LTRwISprfHrcP9B+cMgQAUN7mlIidOYJtw4Upepxs6pupCZGveeUBKeHfPZGd/hgUUC9oZwMNBzJwWFqthKmyjDZfJnLQCC0JHTvVlQenyFQcd/bXdlDk63PCJZY2mgBXpgMaqpkKd0/1fThQwvYHQC8YEV0511xzLfe7f8DMO4BwTUH55/to55xYk9wDj61oOOKxiJ/w==',
+  'content-type': 'application/json',
+  'content-length': '97',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  customer_id: '111111111',
+  order_id: '34d3149b-8eb0-4898-971a-63464ae73f1e',
+  state: 'COMPLETED'
+}
+[test] 05-06-2024 23:05:42 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTA1MDMyNSwiZXhwIjoxNzE1MTM2NzI1fQ.LpKyeGoQ_9Oxv60NwqXII0_7iDnue8jpZSPvFrczs8s"
+}
+[test] 05-06-2024 23:05:43 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTA1MDMyNSwiZXhwIjoxNzE1MTM2NzI1fQ.4u7yp4sVLMrY1WJ8zDOXbuwvuBQZ7L7YFcnFOSrAtFQ"
+}
+[test] 05-06-2024 23:05:44 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-07T02:52:05.439Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-07T02:52:05.439Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 23:05:53 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 23:05:70 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:54254',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTA1MDMyNSwiZXhwIjoxNzE1MTM2NzI1fQ.4u7yp4sVLMrY1WJ8zDOXbuwvuBQZ7L7YFcnFOSrAtFQ',
+  'x-signature': 'HqKqCp84ZDGNHJ7CDBaIFsfAAjUnKg/B6hWN8YPPEIZplHWwe28805QUFaOOyRK0lNbl8DK90ld0UGuR+zjmmOq+bYqWIcHpPufKE5JpeR0aLusPj0X3aKYbPOOaZFjluiEWpNf/+imIdqG0jS/RpagFhdsn/WPHzN9LeBSE+IPVjbtyA4+eMr8tv6R//po5nz3RvRUZw7aKGWS6Z5dqsrts8c0+DvNPXufkShqsGIpkzarQ9yclDFvlTZXAx5RsKcuaXPA83Lt92bpiz+rNWP31jUmU6djtJ8+OuHdBsltSI9B8zWy7Cq57ob8DqCfJaU7D59p3f0+o+tpoWbjpag==',
+  'content-type': 'application/json',
+  'content-length': '97',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  customer_id: '111111111',
+  order_id: '34d3149b-8eb0-4898-971a-63464ae73f1e',
+  state: 'COMPLETED'
+}
+[test] 05-06-2024 23:05:22 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTA1MDQ4NiwiZXhwIjoxNzE1MTM2ODg2fQ.zRdjPXGKabGPwxVPbhI6BEBp10tO-rZH20Xn1dDdTIw"
+}
+[test] 05-06-2024 23:05:23 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTA1MDQ4NiwiZXhwIjoxNzE1MTM2ODg2fQ.f6yMb-ljAU7NMKIgH1kT8gvEd2Pa5j3ntXut5-KalNQ"
+}
+[test] 05-06-2024 23:05:24 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-07T02:54:46.234Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-07T02:54:46.234Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 23:05:38 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 23:05:49 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTA1MDUzMCwiZXhwIjoxNzE1MTM2OTMwfQ.joYntrrKkgPy7jLFdB6-pnUblwONPX-K-CjUqkWtS_g"
+}
+[test] 05-06-2024 23:05:50 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTA1MDUzMCwiZXhwIjoxNzE1MTM2OTMwfQ.WPSXHNNJ5G6EC2iPcoW5mgBlBRTPBDUC3Lt_F_-Zm6k"
+}
+[test] 05-06-2024 23:05:51 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-07T02:55:30.510Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-07T02:55:30.510Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 23:05:98 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 23:05:20 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTA1MDU1NCwiZXhwIjoxNzE1MTM2OTU0fQ.KrxPK-GGTXnVAc2X4_Y0ExZqQZPn6kfpabr5m4uFOP4"
+}
+[test] 05-06-2024 23:05:21 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTA1MDU1NCwiZXhwIjoxNzE1MTM2OTU0fQ.iudatH-zrN1dNwrxX53LGFv2t1eH5K5uG_sYZ4elHtg"
+}
+[test] 05-06-2024 23:05:23 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-07T02:55:54.221Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-07T02:55:54.221Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-06-2024 23:05:42 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-06-2024 23:05:50 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:54323',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTA1MDU1NCwiZXhwIjoxNzE1MTM2OTU0fQ.iudatH-zrN1dNwrxX53LGFv2t1eH5K5uG_sYZ4elHtg',
+  'content-type': 'application/json',
+  'content-length': '97',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  customer_id: '111111111',
+  order_id: '34d3149b-8eb0-4898-971a-63464ae73f1e',
+  state: 'COMPLETED'
+}
+[test] 05-07-2024 00:05:52 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMCIsImlhdCI6MTcxNTA1MjQ0OSwiZXhwIjoxNzE1MTM4ODQ5fQ.dv8VxripdBlNHeUtxNvZOAgEFli_mgMPYBK8Hz0uXec"
+}
+[test] 05-07-2024 00:05:53 info: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTA1MjQ0OSwiZXhwIjoxNzE1MTM4ODQ5fQ._4kxir6GrdTPUQf9ZzpFwtWpIqFdeCFHZqCDOhDpLLM"
+}
+[test] 05-07-2024 00:05:54 info: {
+  "name": "test-sale",
+  "status": "ON_SALE",
+  "isReceivingAddressEditable": false,
+  "phases": 3,
+  "tokensPerPhase": [
+    1000,
+    1500,
+    2000
+  ],
+  "initialPrice": "10.00",
+  "priceIncrement": [
+    "10.00",
+    "5.00"
+  ],
+  "start": "2024-05-07T03:27:29.539Z",
+  "end": null,
+  "pausedTime": 0,
+  "pendingOrderAmount": 0,
+  "totalSold": 0,
+  "totalRewards": 0,
+  "createdAt": "2024-05-07T03:27:29.539Z",
+  "pausedAt": null,
+  "currentPhase": 1,
+  "lowerTokenLimit": 1500,
+  "upperTokenLimit": 2500,
+  "currentPrice": "10.00",
+  "tokensForSale": 4500,
+  "remainingTokens": 4500,
+  "remainingPhaseTokens": 2500
+}
+[test] 05-07-2024 00:05:66 info: {
+  "paymentUrl": "https://test-payment-url.com"
+}
+[test] 05-07-2024 00:05:94 error: Request Error:
+        
+Error:
+{"statusCode":500,"rawErrors":["BAD_REQUEST","INVALID_REQUEST_HEADER","Signature missing","X-Callback-Signature"]}
+        
+Headers:
+{
+  host: '127.0.0.1:55054',
+  'accept-encoding': 'gzip, deflate',
+  accept: 'application/json',
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImlhdCI6MTcxNTA1MjQ0OSwiZXhwIjoxNzE1MTM4ODQ5fQ._4kxir6GrdTPUQf9ZzpFwtWpIqFdeCFHZqCDOhDpLLM',
+  'x-callback-signature': 'b5HoLU8gUkqlAIayeooAVeJVWTkPYic/eHL33+spq++In3g5yH130K8T0wE8NBQKNzINb8wPwoj3TRsjxuot5zsVD1icU4vAt6V2DG/Crcgs0MxFn2pF9jutgXTXj3I2w5p3qGetqOTOl+6UyQFcezeBt8/eLscLvrYHmEoJHMSzx7rQIJe+EvSl8NuxonpRzSuNO060Kxwv1Br2uXJPIktz0GBiSPMfo7MaeNqbfxGcIwshjPC1owcTioqsUTRlR/J2aA6xocpgOiOtfdf7aliFM65l1/ah5olRBnPZkdCt7vX30+IsDC3ZFd57EtK/5L/J0EWnAeblb+A0xdAoNg==',
+  'content-type': 'application/json',
+  'content-length': '97',
+  connection: 'close'
+}
+        
+Params:
+{}
+        
+Query:
+{}
+        
+Body:
+{
+  customer_id: '111111111',
+  order_id: '34d3149b-8eb0-4898-971a-63464ae73f1e',
+  state: 'COMPLETED'
+}

@@ -14,13 +14,19 @@ const verifyChangellyCallbackHeader = async (
   next: NextFunction
 ) => {
   try {
-    verifyCallbackSignature(
-      apiOption,
-      req.body,
-      req.headers as Record<string, string>
-    ) && next();
+    if (
+      verifyCallbackSignature(
+        apiOption,
+        req.body,
+        req.headers as Record<string, string>
+      )
+    ) {
+      next();
+      return;
+    }
   } catch (e) {
     next(e);
+    return;
   }
 
   next(
@@ -28,7 +34,7 @@ const verifyChangellyCallbackHeader = async (
       ChangellyErrorType.BAD_REQUEST,
       ChangellyErrorReason.INVALID_REQUEST,
       `Invalid header for ${apiOption}`,
-      'X-Signature',
+      `X-${apiOption === ApiOptions.FIAT ? 'Callback-' : ''}Signature`,
     ])
   );
 };
